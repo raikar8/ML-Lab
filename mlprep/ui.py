@@ -21,6 +21,11 @@ PAGES = {
     "frontier": "app_pages/frontier.py",
     "settings": "app_pages/settings.py",
     "cpp": "app_pages/cpp.py",
+    "grader": "app_pages/grader.py",
+    "errorlog": "app_pages/errorlog.py",
+    "designs": "app_pages/designs.py",
+    "capstone": "app_pages/capstone.py",
+    "notebooks": "app_pages/notebooks.py",
 }
 
 KIND_ICON = {"theory": ":material/menu_book:", "exercise": ":material/code:", "quiz": ":material/quiz:",

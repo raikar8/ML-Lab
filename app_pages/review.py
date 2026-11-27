@@ -3,7 +3,7 @@ import random
 
 import streamlit as st
 
-from mlprep import content, plan, progress, srs
+from mlprep import content, errorlog, plan, progress, srs
 from mlprep.ui import data, md
 
 d = data()
@@ -26,6 +26,7 @@ with st.sidebar:
     core_only = st.toggle("★ high-yield only", False)
 
 pool = plan.unlocked_questions(start, today) if scope.startswith("Unlocked") else content.all_questions()
+pool = pool + errorlog.as_questions(d)  # your error-log cards are always in the deck
 if wk_sel:
     pool = [q for q in pool if q.week in wk_sel]
 if core_only:
@@ -53,7 +54,7 @@ if not queue:
     st.success("Nothing due. Come back tomorrow, or widen the deck in the sidebar.")
     st.stop()
 
-qidx = content.question_index()
+qidx = content.question_index() | {q.qid: q for q in errorlog.as_questions(d)}
 q = qidx[queue[0]]
 card = d["cards"].get(q.qid)
 with st.container(border=True):

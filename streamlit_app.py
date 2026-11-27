@@ -22,11 +22,16 @@ sections = {
         page("roadmap", "6-month roadmap", ":material/map:"),
         page("review", "Review (spaced repetition)", ":material/replay:"),
         page("mock", "Mock interview", ":material/timer:"),
+        page("grader", "Answer grader", ":material/grading:"),
+        page("errorlog", "Error log", ":material/bug_report:"),
     ],
     "Learn": [
         page("theory", "Theory by week", ":material/menu_book:"),
         page("exercises", "Coding exercises", ":material/code:"),
         page("cpp", "C/C++ track", ":material/memory:"),
+        page("notebooks", "GPU notebooks", ":material/developer_board:"),
+        page("designs", "System design bank", ":material/architecture:"),
+        page("capstone", "Hardware capstone", ":material/precision_manufacturing:"),
     ],
     "Deep dives": [
         page("transformers", "Transformer hub", ":material/account_tree:"),
