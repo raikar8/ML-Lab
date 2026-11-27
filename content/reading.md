@@ -202,3 +202,14 @@ Primary sources per week. Read one per week, write five lines in your own words 
 - [Wide & Deep Learning for Recommender Systems](https://arxiv.org/abs/1606.07792) — Cheng et al., DLRS 2016. Memorisation + generalisation.
 - [Deep Learning Recommendation Model for Personalization and Recommendation Systems (DLRM)](https://arxiv.org/abs/1906.00091) — Naumov et al., 2019. Embedding tables + dot interactions.
 - [Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts](https://doi.org/10.1145/3219819.3220007) — Ma et al., KDD 2018. MMoE.
+
+## E2
+- [Understanding the Python GIL](https://dabeaz.com/GIL) — David Beazley, PyCon 2010. How the GIL schedules threads and why CPU-bound threads fight; slides and talk.
+- [PEP 703 — Making the Global Interpreter Lock Optional in CPython](https://peps.python.org/pep-0703/) — Sam Gross, 2023. Why the GIL exists and how biased reference counting removes it.
+- [PEP 779 — Criteria for supported status for free-threaded Python](https://peps.python.org/pep-0779/) — Bonev, Hunter & Gross, 2025. Why 3.14t became officially supported but optional.
+- [Python support for free threading](https://docs.python.org/3/howto/free-threading-python.html) — Python documentation. Installing and checking the free-threaded build, and its current limitations.
+- [Python free-threading guide](https://py-free-threading.github.io/) — Quansight Labs and community. Porting extensions and the state of ecosystem support.
+- [The Python 2.3 Method Resolution Order](https://docs.python.org/3/howto/mro.html) — Michele Simionato, Python documentation. C3 linearisation, the basis of `super()`.
+- [PEP 544 — Protocols: Structural subtyping (static duck typing)](https://peps.python.org/pep-0544/) — Levkivskyi, Lehtosalo & Langa, 2017. Protocols vs ABCs.
+- [Protocols and structural subtyping](https://typing.python.org/en/latest/reference/protocols.html) — Python typing documentation. Practical guide to `Protocol` and `runtime_checkable`.
+- [Architecture Patterns with Python](https://www.oreilly.com/library/view/architecture-patterns-with/9781492052197/) — Percival & Gregory, O'Reilly 2020. Dependency inversion, testable layering and design patterns in real Python services.

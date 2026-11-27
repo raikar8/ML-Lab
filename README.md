@@ -16,13 +16,14 @@ streamlit run streamlit_app.py
 | **Today** | Your tasks for today (theory section, coding exercise, interview coding problem, interview questions; lab day; review day), coding re-solves due, this week's reading, catch-up list, streak |
 | **Diagnostic & Week 0** | A 24-question, 10-minute diagnostic (linear algebra, probability, calculus, Python, NumPy, algorithms) that tells you which days of the optional **Week 0 — Foundations** to do before week 1 |
 | **6-month roadmap** | All 27 weeks in 6 phases with progress and card mastery per week |
-| **Review** | Spaced-repetition deck of ~280 interview questions (★ = high-yield), unlocked as you go; optionally plus Week 0 and the elective |
+| **Review** | Spaced-repetition deck of ~280 interview questions (★ = high-yield), unlocked as you go; optionally plus Week 0 and the two electives |
 | **Mock interview** | Timed question rounds with follow-up probes and self-scoring; weak answers go back into review |
 | **Theory by week** | 5 theory sections per week with equations, interview angles, questions and a mini-project |
-| **Coding exercises** | 82 Python / NumPy / PyTorch implementation exercises (76 in the weekly plan, 5 in Week 0, 1 elective) with pytest tests and reference solutions; edit & run in the app |
+| **Coding exercises** | 87 Python / NumPy / PyTorch implementation exercises (76 in the weekly plan, 5 in Week 0, 6 in the electives) with pytest tests and reference solutions; edit & run in the app |
 | **Coding interview** | 59 classic interview problems across 19 patterns (hashing, two pointers, sliding window, stacks, binary search, linked lists, trees, tries, heaps, intervals, graphs, backtracking, DP, greedy, bits, matrix, design, randomised, ML from scratch). Each has my own problem statement, hints, follow-ups and a target complexity, plus tests that cross-check random inputs against a brute force. Two are scheduled each week; solve with a timer, and clean solves climb a re-solve ladder (3 → 10 → 30 → 90 days). Also: timed two-problem mocks, a pattern guide with templates, and the 31 ML coding questions interviewers ask most, with what each interviewer checks |
 | **C/C++ track** | 15 embedded/real-time C++ exercises (fixed point, FIR/biquad, SPSC ring buffer, memory pool, int8 GEMM + requantization, streaming conv, im2col, tiled GEMM…) with tests; compile & run from the app or with CMake |
-| **Papers** | The whole reading list (135 primary sources across all 27 weeks + the elective): search, filter by week/topic/source, tick off what you've read, write five-line notes (changed · why · evidence · cost · question), export them as Markdown. Every link goes to arXiv, a DOI or the official page |
+| **Papers** | The whole reading list (144 primary sources across all 27 weeks + the electives): search, filter by week/topic/source, tick off what you've read, write five-line notes (changed · why · evidence · cost · question), export them as Markdown. Every link goes to arXiv, a DOI or the official page |
+| **Electives** | Optional sections in Theory, same format as the weeks. **E1 Recommender systems.** **E2 Python internals, OOP & software engineering**: the GIL and why threads don't speed up CPU-bound Python (and what to use instead: processes, asyncio, vectorisation, free-threaded 3.14t), the object model (descriptors, MRO, memory), OOP done well (composition, ABCs vs Protocols), SOLID and the patterns ML code uses (registry, strategy, callbacks, adapter), and testing/config/logging practice — 5 exercises, 21 questions |
 | **Transformer hub** | Evolution 2017→2026, block anatomy then vs now, attention/positional/MoE cheat sheets, primary sources per tab |
 | **Chinese model atlas** | DeepSeek, Qwen, Kimi, GLM, MiniMax models and their signature techniques, with the primary source for each model |
 | **Frontier watch** | Ongoing topics worth tracking, where to start reading for each, and how to keep current |
@@ -70,10 +71,10 @@ app_pages/              Today, diagnostic, roadmap, review, mock, theory, exerci
 app_pages/labs/         the 14 interactive labs
 content/weeks/wNN.md    theory (days 1–5), mini-project and question bank for each week (★ = high-yield)
 content/foundations/    Week 0 (f0.md) · content/coding/patterns.md (interview method + pattern guide)
-exercises/              stubs you edit (generated from solutions/ by tools/make_stubs.py): f0_* Week 0, wNN_* weekly, e1_* elective, cNN_* interview problems
+exercises/              stubs you edit (generated from solutions/ by tools/make_stubs.py): f0_* Week 0, wNN_* weekly, e1_*/e2_* electives, cNN_* interview problems
 solutions/              reference solutions
 tests/exercises/        pytest tests for every exercise; tests/test_app.py renders every page
-content/reading.md      primary sources per week (## W<n>) and per elective (## E<n>) — parsed by mlprep/papers.py · content/system_design.md · content/electives/ (recommender systems)
+content/reading.md      primary sources per week (## W<n>) and per elective (## E<n>) — parsed by mlprep/papers.py · content/system_design.md · content/electives/ (E1 recommender systems · E2 Python internals, OOP & software engineering)
 cpp/                    C++ track: exercises/, solutions/, tests/ (dependency-free harness), CMakeLists.txt
 gpu/                    from-scratch Triton kernels, FlashAttention, static-KV decoder, DDP/FSDP2 script (used by notebooks/)
 notebooks/              GPU notebooks (generated by tools/make_notebooks.py)

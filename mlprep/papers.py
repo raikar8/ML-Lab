@@ -35,7 +35,7 @@ WEEK_TOPIC: dict[str, str] = {
     "W20": "LLM behaviour & evaluation", "W21": "Embedded hardware & deployment",
     "W22": "Quantization & number formats", "W23": "Quantization & number formats",
     "W24": "Pruning & distillation", "W25": "Embedded hardware & deployment",
-    "W26": "ML system design", "W27": "ML system design", "E1": "Recommender systems", "F0": "Foundations",
+    "W26": "ML system design", "W27": "ML system design", "E1": "Recommender systems", "E2": "Python & software engineering", "F0": "Foundations",
 }
 # Cross-tags: strict patterns (word boundaries) matched against title + summary.
 CROSS_TAGS: dict[str, str] = {
