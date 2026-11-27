@@ -68,7 +68,7 @@ def stub_source(src: str) -> str:
 
 
 def main(force: bool) -> None:
-    for sol in sorted(SOL.glob("w*.py")) + sorted(SOL.glob("e*.py")):
+    for sol in sorted(SOL.glob("w*.py")) + sorted(SOL.glob("e*.py")) + sorted(SOL.glob("f*.py")) + sorted(SOL.glob("c*.py")):
         dst = EX / sol.name
         src = sol.read_text(encoding="utf-8")
         if "stub: custom" in src.split('"""')[1]:

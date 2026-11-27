@@ -1,0 +1,42 @@
+"""
+title: Top-k frequent elements
+pattern: Heap / priority queue
+level: medium
+time: 20
+frequency: very high
+week: 4
+day: 2
+tags: heap, bucket-sort, counting
+complexity: O(n log k) with a size-k heap, or O(n) with bucket sort by count
+hint: Count first (a dict). Then you need the k largest counts — not a full sort.
+hint: A min-heap of size k keeps the k best seen so far; or bucket values by count (counts are ≤ n).
+follow-up: The data is a stream too large for memory: approximate heavy hitters (Misra–Gries, count-min sketch).
+follow-up: Top-k frequent words with ties broken alphabetically.
+
+Return the `k` most frequent values of `nums`, ordered by **decreasing frequency**; ties go to the value that
+**appears first** in `nums`. If there are fewer than `k` distinct values, return them all.
+Don't use `Counter.most_common`.
+
+```
+top_k_frequent([1, 1, 1, 2, 2, 3], 2) -> [1, 2]
+top_k_frequent([4, 5, 5, 4, 6], 2)    -> [4, 5]   # 4 and 5 tie; 4 appears first
+```
+"""
+import heapq
+
+
+def top_k_frequent(nums: list[int], k: int) -> list[int]:
+    count: dict[int, int] = {}
+    first: dict[int, int] = {}
+    for i, x in enumerate(nums):
+        count[x] = count.get(x, 0) + 1
+        first.setdefault(x, i)
+    # min-heap keyed by (count, -first): the root is the current "worst" of the k kept
+    heap: list[tuple[int, int, int]] = []
+    for x, c in count.items():
+        item = (c, -first[x], x)
+        if len(heap) < k:
+            heapq.heappush(heap, item)
+        elif item > heap[0]:
+            heapq.heapreplace(heap, item)
+    return [x for _, _, x in sorted(heap, reverse=True)]

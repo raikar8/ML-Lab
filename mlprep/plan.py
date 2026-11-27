@@ -1,7 +1,8 @@
 """Turn the curriculum into a dated, day-by-day task list.
 
 Every week has the same rhythm:
-  Days 1-5  Theory section + coding exercise(s) + quiz on that day's questions
+  Days 1-5  Theory section + coding exercise(s) + quiz on that day's questions;
+            two or three days a week also carry one interview coding problem (exercises/c*.py)
   Day 6     Lab day: the week's interactive lab and/or a mini-project
   Day 7     Review day: spaced-repetition review + a timed weekly mock + teach-back note
 """
@@ -10,7 +11,7 @@ from __future__ import annotations
 import datetime as dt
 from dataclasses import dataclass
 
-from . import content
+from . import coding, content
 
 TOTAL_WEEKS = 27
 DAY_NAMES = {1: "Theory + code", 2: "Theory + code", 3: "Theory + code", 4: "Theory + code",
@@ -52,7 +53,7 @@ LABS = {
 @dataclass
 class Task:
     tid: str
-    kind: str  # theory | exercise | quiz | lab | project | review | mock | note
+    kind: str  # theory | exercise | coding | quiz | lab | project | review | mock | note
     title: str
     minutes: int
     week: int
@@ -84,6 +85,9 @@ def tasks_for(week: int, day: int) -> list[Task]:
             out.append(Task(f"{base}-theory", "theory", f"Read: {sec.title}", max(20, words // 12), week, day))
         for ex in content.exercises_for(week, day):
             out.append(Task(f"{base}-ex-{ex.key}", "exercise", f"Code: {ex.title}", ex.minutes, week, day, ex.key))
+        for p in coding.for_day(week, day):
+            out.append(Task(f"{base}-code-{p.key}", "coding", f"Interview problem: {p.title}", p.minutes, week, day,
+                            p.key))
         qs = [q for q in w.questions if q.day == day]
         if qs:
             out.append(Task(f"{base}-quiz", "quiz", f"Answer {len(qs)} interview questions out loud, then check",

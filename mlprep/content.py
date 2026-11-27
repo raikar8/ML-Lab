@@ -153,7 +153,8 @@ def weeks() -> dict[int, Week]:
 
 @lru_cache(maxsize=1)
 def exercises() -> dict[str, Exercise]:
-    return {p.stem: parse_exercise(p) for p in sorted(EX_DIR.glob("w*.py")) + sorted(EX_DIR.glob("e*.py"))}
+    return {p.stem: parse_exercise(p)
+            for p in sorted(EX_DIR.glob("f*.py")) + sorted(EX_DIR.glob("w*.py")) + sorted(EX_DIR.glob("e*.py"))}
 
 
 @lru_cache(maxsize=1)

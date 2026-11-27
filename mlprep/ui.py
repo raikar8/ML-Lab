@@ -27,9 +27,11 @@ PAGES = {
     "capstone": "app_pages/capstone.py",
     "notebooks": "app_pages/notebooks.py",
     "papers": "app_pages/papers.py",
+    "coding": "app_pages/coding.py",
+    "diagnostic": "app_pages/diagnostic.py",
 }
 
-KIND_ICON = {"theory": ":material/menu_book:", "exercise": ":material/code:", "quiz": ":material/quiz:",
+KIND_ICON = {"theory": ":material/menu_book:", "exercise": ":material/code:", "coding": ":material/terminal:", "quiz": ":material/quiz:",
              "lab": ":material/science:", "project": ":material/build:", "review": ":material/replay:",
              "mock": ":material/timer:", "note": ":material/edit_note:"}
 
@@ -73,6 +75,12 @@ def go_papers(section: str | None) -> None:
     st.switch_page(PAGES["papers"])
 
 
+def go_coding(key: str | None) -> None:
+    """Open the Coding interview page on one problem."""
+    st.session_state.coding_key = key
+    st.switch_page(PAGES["coding"])
+
+
 def go_mock(week: int | None) -> None:
     st.session_state.mock_week = week
     st.switch_page(PAGES["mock"])
@@ -94,6 +102,9 @@ def task_row(t: Task, key_prefix: str = "") -> None:
     elif t.kind == "exercise":
         if c3.button("Open", key=k, width="stretch"):
             go_exercise(t.ref)
+    elif t.kind == "coding":
+        if c3.button("Solve", key=k, width="stretch"):
+            go_coding(t.ref)
     elif t.kind == "lab":
         lab_link(t.ref, "Open lab", c3)
     elif t.kind == "review":

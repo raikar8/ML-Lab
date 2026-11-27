@@ -1,12 +1,8 @@
 import datetime as dt
-import os
-import subprocess
-import sys
-
 import streamlit as st
 
 from mlprep import content, progress
-from mlprep.content import ROOT
+from mlprep.runner import run_pytest
 from mlprep.ui import data, md
 
 d = data()
@@ -63,10 +59,7 @@ st.markdown(f"Files: `exercises/{key}.py` (edit this) · `tests/exercises/test_{
 tab_edit, tab_tests, tab_sol = st.tabs(["Edit & run", "Tests", "Reference solution"])
 
 def run_tests() -> tuple[bool, str]:
-    env = dict(os.environ, MLPREP_TARGET="exercises")
-    r = subprocess.run([sys.executable, "-m", "pytest", "-q", "-x", "--no-header", "-p", "no:cacheprovider",
-                        str(ex.test_path)], cwd=ROOT, capture_output=True, text=True, env=env, timeout=300)
-    return r.returncode == 0, (r.stdout + r.stderr)[-6000:]
+    return run_pytest(ex.test_path)
 
 with tab_edit:
     code = st.text_area("Your code (saved to the exercise file)", ex.stub_path.read_text(encoding="utf-8"),
