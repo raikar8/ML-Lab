@@ -9,7 +9,7 @@ from mlprep.ui import data, go_theory
 d = data()
 allp = papers.all_papers()
 weeks = content.weeks()
-electives = content.electives()
+electives = content.optional_weeks()
 
 st.title("Papers")
 st.markdown(

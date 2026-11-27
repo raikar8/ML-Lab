@@ -24,11 +24,11 @@ with st.sidebar:
     wk_sel = st.multiselect("Only these weeks", list(weeks), format_func=lambda k: f"W{k:02d}")
     new_limit = st.slider("New cards per session", 0, 50, 15)
     core_only = st.toggle("★ high-yield only", False)
-    with_electives = st.toggle("Include electives (e.g. recommender systems)", False)
+    with_electives = st.toggle("Include Week 0 & electives (foundations, recommender systems)", False)
 
 pool = plan.unlocked_questions(start, today) if scope.startswith("Unlocked") else content.all_questions()
 pool = pool + errorlog.as_questions(d)  # your error-log cards are always in the deck
-elective_qs = [q for w in content.electives().values() for q in w.questions]
+elective_qs = [q for w in content.optional_weeks().values() for q in w.questions]
 if with_electives:
     pool = pool + elective_qs
 if wk_sel:

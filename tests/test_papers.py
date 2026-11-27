@@ -23,7 +23,7 @@ def test_every_reading_line_parses():
 def test_sections_and_weeks():
     ps = papers.all_papers()
     assert {p.week for p in ps if p.week} == set(range(1, 28))
-    assert {p.section for p in ps if p.week is None} == set(content.electives())
+    assert {p.section for p in ps if p.week is None} == set(content.optional_weeks())
     # the elective block must not leak into week 27's reading
     assert "Recommender" not in content.reading()[27]
     assert "E1" in content.elective_reading()

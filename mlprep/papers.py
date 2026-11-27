@@ -35,7 +35,7 @@ WEEK_TOPIC: dict[str, str] = {
     "W20": "LLM behaviour & evaluation", "W21": "Embedded hardware & deployment",
     "W22": "Quantization & number formats", "W23": "Quantization & number formats",
     "W24": "Pruning & distillation", "W25": "Embedded hardware & deployment",
-    "W26": "ML system design", "W27": "ML system design", "E1": "Recommender systems",
+    "W26": "ML system design", "W27": "ML system design", "E1": "Recommender systems", "F0": "Foundations",
 }
 # Cross-tags: strict patterns (word boundaries) matched against title + summary.
 CROSS_TAGS: dict[str, str] = {
@@ -65,7 +65,9 @@ class Paper:
 
     @property
     def section_label(self) -> str:
-        return f"Week {self.week}" if self.week is not None else f"Elective {self.section}"
+        if self.week is not None:
+            return f"Week {self.week}"
+        return "Week 0 (foundations)" if self.section.startswith("F") else f"Elective {self.section}"
 
 
 def slug(title: str) -> str:
@@ -99,7 +101,7 @@ def parse(text: str) -> list[Paper]:
     seen: dict[str, int] = {}
     for raw in text.splitlines():
         line = raw.strip()
-        h = re.match(r"^## ([WE]\d+)\s*$", line)
+        h = re.match(r"^## ([WEF]\d+)\s*$", line)
         if h:
             section = h.group(1)
             continue

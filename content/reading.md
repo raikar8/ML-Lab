@@ -1,5 +1,16 @@
 Primary sources per week. Read one per week, write five lines in your own words (week 19's template).
 
+## F0
+- [Essence of Linear Algebra](https://3blue1brown.com/topics/linear-algebra) — Grant Sanderson (3Blue1Brown), 2016 (video series). Matrices as transformations; watch chapters 1–9 and 14–15 before D1.
+- [Mathematics for Machine Learning](https://mml-book.github.io/) — Deisenroth, Faisal & Ong, Cambridge University Press 2020 (book). Free PDF; chapters 2, 4, 5 and 6 match D1–D3.
+- [Linear Algebra Review and Reference (CS229)](https://cs229.stanford.edu/summer2022/cs229-linalg.pdf) — Kolter, Do & Ma, Stanford 2020. A compact reference with matrix calculus.
+- [Probability Theory Review (CS229)](https://cs229.stanford.edu/summer2020/cs229-prob.pdf) — Stanford CS229 notes, 2020. Random variables, expectations and common distributions in 12 pages.
+- [Seeing Theory](https://seeing-theory.brown.edu/) — Kunin et al., Brown University 2017 (interactive). Visual probability and statistics for D2.
+- [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html) — Andrej Karpathy, 2022–24 (video course). Lecture 1 (micrograd) is the best hour you can spend on backprop.
+- [Time complexity of operations on built-in types](https://docs.python.org/3/builtins/time-complexity.html) — Python documentation, 2026. The official cost table behind D4.
+- [Broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) — NumPy documentation, 2026. The rules behind every vectorised D5 exercise.
+- [NeetCode roadmap](https://neetcode.io/roadmap) — NeetCode, 2026 (problem list). Pattern-ordered practice problems to go with the Coding interview page.
+
 ## W1
 - [Hidden Technical Debt in Machine Learning Systems](https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html) — Sculley et al., NeurIPS 2015. Why production ML fails for reasons other than the model.
 - [A Few Useful Things to Know About Machine Learning](https://doi.org/10.1145/2347736.2347755) — Domingos, CACM 2012. Generalisation, overfitting and intuition in 10 pages.

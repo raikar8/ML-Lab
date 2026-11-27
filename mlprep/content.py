@@ -169,6 +169,23 @@ def electives() -> dict[str, Week]:
     return out
 
 
+@lru_cache(maxsize=1)
+def foundations() -> dict[str, Week]:
+    """The optional Week 0 (content/foundations/f0.md), keyed 'F0'. Question ids are f0qNN."""
+    out = {}
+    for p in sorted((ROOT / "content" / "foundations").glob("f*.md")):
+        w = parse_week(p)
+        for q in w.questions:
+            q.qid = p.stem + q.qid[3:]
+        out[p.stem.upper()] = w
+    return out
+
+
+def optional_weeks() -> dict[str, Week]:
+    """Week 0 first, then the electives — everything outside the 27-week schedule."""
+    return {**foundations(), **electives()}
+
+
 def all_questions() -> list[Question]:
     return [q for w in weeks().values() for q in w.questions]
 
@@ -177,8 +194,13 @@ def question_index() -> dict[str, Question]:
     return {q.qid: q for q in all_questions()}
 
 
-def exercises_for(week: int, day: int | None = None) -> list[Exercise]:
-    return [e for e in exercises().values() if e.week == week and (day is None or e.day == day)]
+def exercises_for(week: int | str, day: int | None = None) -> list[Exercise]:
+    """Exercises of a scheduled week (int) or of an optional week by key ("E1", "F0" → files e1_*, f0_*)."""
+    if isinstance(week, str):
+        prefix = week.lower() + "_"
+        return [e for e in exercises().values() if e.key.startswith(prefix) and (day is None or e.day == day)]
+    return [e for e in exercises().values() if e.key.startswith("w") and e.week == week
+            and (day is None or e.day == day)]
 
 
 @lru_cache(maxsize=1)
@@ -187,7 +209,7 @@ def _reading_sections() -> dict[str, str]:
     p = ROOT / "content" / "reading.md"
     if not p.exists():
         return {}
-    parts = re.split(r"^## ([WE]\d+)\s*$", p.read_text(encoding="utf-8"), flags=re.M)
+    parts = re.split(r"^## ([WEF]\d+)\s*$", p.read_text(encoding="utf-8"), flags=re.M)
     return {parts[i]: parts[i + 1].strip() for i in range(1, len(parts), 2)}
 
 
@@ -197,5 +219,5 @@ def reading() -> dict[int, str]:
 
 
 def elective_reading() -> dict[str, str]:
-    """Reading list per elective, keyed 'E<n>'."""
-    return {k: v for k, v in _reading_sections().items() if k.startswith("E")}
+    """Reading list per optional week (Week 0 'F0', electives 'E<n>')."""
+    return {k: v for k, v in _reading_sections().items() if k[0] in "EF"}

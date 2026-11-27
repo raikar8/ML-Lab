@@ -14,7 +14,7 @@ cur = plan.week_day_for(start, dt.date.today())
 default_week = st.session_state.pop("theory_week", None) or (cur[0] if cur else 1)
 default_day = st.session_state.pop("theory_day", None)
 
-electives = content.electives()
+electives = content.optional_weeks()
 allw = {**weeks, **electives}
 keys = list(allw)
 week = st.sidebar.selectbox("Week", keys, index=keys.index(default_week) if default_week in keys else 0,
@@ -24,7 +24,9 @@ w = allw[week]
 if isinstance(week, int):
     st.caption(f"Phase {w.phase} · {PHASES[w.phase][0]} · Week {week} · starts {plan.date_for(start, week, 1):%d %b %Y}")
 else:
-    st.caption("Elective · outside the schedule — study it whenever it's relevant to the roles you apply for")
+    st.caption("Week 0 · optional foundations before week 1 — take the diagnostic to see which days you need"
+               if str(week).startswith("F") else
+               "Elective · outside the schedule — study it whenever it's relevant to the roles you apply for")
 st.title(w.title)
 if w.goal:
     st.markdown(f"**Goal.** {w.goal}")
@@ -57,7 +59,7 @@ else:
     sec = w.days[options.index(section)]
     st.header(f"Day {sec.day} · {sec.title}")
     md(sec.body)
-    exs = content.exercises_for(w.week, sec.day)
+    exs = content.exercises_for(week, sec.day)
     qs = [q for q in w.questions if q.day == sec.day]
     if exs:
         st.subheader("Code it")
