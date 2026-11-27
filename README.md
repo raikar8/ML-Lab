@@ -18,12 +18,12 @@ streamlit run streamlit_app.py
 | **Review** | Spaced-repetition deck of ~270 interview questions (★ = high-yield), unlocked as you go |
 | **Mock interview** | Timed question rounds with follow-up probes and self-scoring; weak answers go back into review |
 | **Theory by week** | 5 theory sections per week with equations, interview angles, questions and a mini-project |
-| **Coding exercises** | Python / NumPy / PyTorch stubs with pytest tests and reference solutions; edit & run in the app |
+| **Coding exercises** | 73 Python / NumPy / PyTorch stubs with pytest tests and reference solutions; edit & run in the app |
 | **Transformer hub** | Evolution 2017→2026, block anatomy then vs now, attention/positional/MoE cheat sheets |
 | **Chinese model atlas** | DeepSeek, Qwen, Kimi, GLM, MiniMax models and their signature techniques |
 | **Frontier watch** | Ongoing topics worth tracking, and how to keep current |
 | **Interview in a week** | Enter your interview date and role → a 7-day crash plan with drills, top questions and checklists |
-| **Labs** | Interactive labs: quantization, KV cache, MoE routing, roofline, attention/RoPE, diffusion, GRPO, … |
+| **Labs** | 14 interactive labs: bias–variance, metrics, k-means/GMM, optimisers, CNN cost, attention/RoPE, KV cache & sampling, MoE routing, efficient attention, diffusion, GRPO/CISPO, roofline & Q15, quantization, pruning |
 
 ## The plan
 
@@ -49,3 +49,15 @@ pytest tests/test_app.py                   # every page renders
 Progress is saved to `progress.json` (git-ignored). Set `MLPREP_PROGRESS=/path/progress.json` to keep it elsewhere.
 
 Content reflects public information up to November 2026; model details come from the labs' technical reports and model cards.
+
+## Repository layout
+
+```
+streamlit_app.py        entry point (navigation)
+app_pages/              Today, roadmap, review, mock, theory, exercises, sprint, hub, atlas, frontier, settings
+app_pages/labs/         the 14 interactive labs
+content/weeks/wNN.md    theory (days 1–5), mini-project and question bank for each week (★ = high-yield)
+exercises/              stubs you edit (generated from solutions/ by tools/make_stubs.py)
+solutions/              reference solutions
+tests/exercises/        pytest tests for every exercise; tests/test_app.py renders every page
+```
