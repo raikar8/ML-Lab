@@ -7,3 +7,5 @@ __pycache__/
 build/
 build-*/
 cpp/build-app/
+capstone/out/
+data/
