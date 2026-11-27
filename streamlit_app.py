@@ -19,6 +19,7 @@ def page(key: str, title: str, icon: str, **kw):
 sections = {
     "Daily": [
         page("today", "Today", ":material/today:", default=True),
+        page("diagnostic", "Diagnostic & Week 0", ":material/quiz:"),
         page("roadmap", "6-month roadmap", ":material/map:"),
         page("review", "Review (spaced repetition)", ":material/replay:"),
         page("mock", "Mock interview", ":material/timer:"),
@@ -28,6 +29,7 @@ sections = {
     "Learn": [
         page("theory", "Theory by week", ":material/menu_book:"),
         page("exercises", "Coding exercises", ":material/code:"),
+        page("coding", "Coding interview", ":material/terminal:"),
         page("cpp", "C/C++ track", ":material/memory:"),
         page("notebooks", "GPU notebooks", ":material/developer_board:"),
         page("designs", "System design bank", ":material/architecture:"),

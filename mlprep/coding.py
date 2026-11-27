@@ -29,7 +29,7 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
 
-from .content import EX_DIR, SOL_DIR, TEST_DIR
+from .content import EX_DIR, ROOT, SOL_DIR, TEST_DIR
 
 PATTERNS = [
     "Arrays & hashing", "Two pointers", "Sliding window", "Stack", "Binary search", "Linked list", "Trees",
@@ -121,16 +121,21 @@ def state(data: dict) -> dict:
     return data.setdefault("coding", {})
 
 
-def record(data: dict, key: str, passed: bool, minutes: float, hints: int, today: dt.date | None = None) -> dict:
-    """Log an attempt and move the problem on the re-solve ladder. Returns the updated entry."""
+def record(data: dict, key: str, passed: bool, minutes: float | None, hints: int,
+           today: dt.date | None = None) -> dict:
+    """Log an attempt and move the problem on the re-solve ladder. Returns the updated entry.
+
+    ``minutes=None`` means the attempt wasn't timed: a pass then counts like a slow one (back in 2 days).
+    """
     today = today or dt.date.today()
     p = problems().get(key)
     target = p.minutes if p else 30
     e = state(data).setdefault(key, {"attempts": [], "rung": 0})
-    e["attempts"].append({"date": today.isoformat(), "passed": passed, "minutes": round(minutes, 1), "hints": hints})
+    e["attempts"].append({"date": today.isoformat(), "passed": passed,
+                          "minutes": None if minutes is None else round(minutes, 1), "hints": hints})
     if not passed:
         nxt = 1
-    elif minutes <= target and hints == 0:
+    elif minutes is not None and minutes <= target and hints == 0:
         nxt = LADDER[min(e["rung"], len(LADDER) - 1)]
         e["rung"] = min(e["rung"] + 1, len(LADDER))
     else:
@@ -144,7 +149,8 @@ def solved(data: dict, key: str) -> bool:
 
 
 def best_minutes(data: dict, key: str) -> float | None:
-    ts = [a["minutes"] for a in state(data).get(key, {}).get("attempts", []) if a["passed"]]
+    ts = [a["minutes"] for a in state(data).get(key, {}).get("attempts", [])
+          if a["passed"] and a["minutes"] is not None]
     return min(ts) if ts else None
 
 
@@ -161,3 +167,53 @@ def due(data: dict, today: dt.date | None = None) -> list[Problem]:
 def mastered(data: dict, key: str) -> bool:
     """Solved cleanly at least twice in a row on the ladder."""
     return state(data).get(key, {}).get("rung", 0) >= 2
+
+
+# ---- pattern guide -------------------------------------------------------------
+
+@lru_cache(maxsize=1)
+def guide() -> dict[str, str]:
+    """content/coding/patterns.md split on '## ' headings: {"The method": ..., "Arrays & hashing": ...}."""
+    p = ROOT / "content" / "coding" / "patterns.md"
+    if not p.exists():
+        return {}
+    parts = re.split(r"^## (.+)$", p.read_text(encoding="utf-8"), flags=re.M)
+    return {parts[i].strip(): parts[i + 1].strip() for i in range(1, len(parts), 2)}
+
+
+# ---- the ML coding questions interviewers ask most --------------------------------
+# (exercise key, how often it comes up, what the interviewer is checking, target minutes, which roles)
+ML_MOST_ASKED: list[tuple[str, str, str, int, str]] = [
+    ("w10_mha", "very high", "Shapes stated up front, 1/√d scaling, masking with −inf *before* softmax, "
+     "head split/merge with view/transpose, causal + padding masks combined.", 25, "all"),
+    ("w02_softmax_xent", "very high", "Subtract the max, log-sum-exp, gradient = p − y, no NaNs on large logits.", 15, "all"),
+    ("w04_kmeans", "very high", "Vectorised squared distances, empty-cluster handling, convergence test, k-means++ seeding.", 25, "all"),
+    ("w02_logreg", "very high", "Stable sigmoid / BCE, gradient derivation, L2 not applied to the bias, learning-rate sanity.", 20, "all"),
+    ("w05_mlp_numpy", "very high", "Backprop by hand with cached activations, shapes of every gradient, a numerical gradient check.", 35, "all"),
+    ("w09_train_loop", "very high", "zero_grad placement, train()/eval(), no_grad for validation, clipping, accumulation, device moves.", 25, "all"),
+    ("w02_metrics", "very high", "Precision/recall/F1 from counts, ROC-AUC by ranking with ties, empty-class edge cases.", 25, "all"),
+    ("w27_sampling", "very high", "Temperature, top-k, top-p (nucleus) with a correct cumulative cut, repetition penalty.", 20, "LLM"),
+    ("w11_gqa_kv_cache", "very high", "Incremental decoding equals the full pass; KV-cache shapes; GQA head repetition.", 35, "LLM"),
+    ("w07_nms", "very high", "IoU with zero-area boxes, sort by score, suppress by threshold, vectorised IoU.", 20, "vision"),
+    ("w03_knn", "very high", "Distances via ‖a‖² + ‖b‖² − 2ab without loops, argpartition, tie-breaking.", 15, "all"),
+    ("w01_lru_cache", "very high", "Dict + doubly linked list with sentinels, O(1) get/put, eviction order.", 25, "all"),
+    ("c57_dropout", "high", "Inverted scaling 1/(1−p), mask reused in backward, eval is the identity.", 15, "all"),
+    ("c56_stratified_kfold", "high", "Per-class round-robin, no leakage between folds, reproducible seeds; group/time splits as follow-ups.", 25, "all"),
+    ("c55_naive_bayes", "high", "Log space, Laplace smoothing, OOV handling, normalised posteriors.", 30, "all"),
+    ("c58_beam_search", "high", "EOS handling, length normalisation, beam=1 equals greedy, ties.", 30, "LLM / ASR"),
+    ("w03_tree_split", "high", "Gini/entropy, sorting thresholds once per feature, weighted child impurity.", 35, "all"),
+    ("w04_pca", "high", "Centre the data, SVD vs covariance eigendecomposition, explained variance ratio, reconstruction.", 20, "all"),
+    ("w06_norms", "high", "LayerNorm vs BatchNorm axes, running statistics in eval, folding BN into conv for deployment.", 30, "all"),
+    ("w06_optimizers", "high", "Adam bias correction, AdamW's decoupled weight decay, momentum buffers.", 30, "all"),
+    ("w07_conv_im2col", "high", "Output-size formula with padding/stride/dilation, im2col + GEMM, cost in MACs.", 35, "embedded / vision"),
+    ("w05_micrograd", "high", "Topological order for backward, gradient accumulation (+=) on shared nodes.", 40, "all"),
+    ("w10_bpe", "high", "Pair counting, merge application order, encoding unseen words.", 40, "LLM"),
+    ("w10_rope", "high", "Rotate pairs of dimensions, frequencies θᵢ, prove the relative-position property.", 25, "LLM"),
+    ("w17_lora", "high", "Frozen base weight, A/B init (B = 0), scaling α/r, merge and unmerge.", 20, "LLM"),
+    ("w24_kd_loss", "high", "Softened softmax with T, KL direction, the T² factor, mixing with the hard-label loss.", 15, "embedded"),
+    ("w22_quant_basics", "high", "Scale/zero-point for asymmetric vs symmetric, clamping, SQNR, calibration choices.", 25, "embedded"),
+    ("w22_int8_linear", "high", "int32 accumulation, requantisation with a fixed-point multiplier and shift, bias in int32.", 40, "embedded"),
+    ("w01_streaming", "high", "Welford's online variance, reservoir sampling probability k/i, heavy hitters.", 30, "all"),
+    ("w08_logmel", "high", "Framing and windowing, power spectrum, mel filterbank construction, log with a floor.", 35, "audio"),
+    ("w14_flash_attention", "medium", "Online softmax (running max and denominator) and tiling; equals naive attention.", 40, "LLM infra"),
+]
