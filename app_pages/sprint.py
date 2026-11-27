@@ -4,7 +4,8 @@ import datetime as dt
 import streamlit as st
 
 from mlprep import content, progress, srs
-from mlprep.ui import data, go_exercise, go_theory, question_expander
+from mlprep import coding
+from mlprep.ui import data, go_coding, go_exercise, go_theory, question_expander
 
 d = data()
 today = dt.date.today()
@@ -91,6 +92,20 @@ def picks(wks, n_q=15, n_ex=2):
     return qs[:n_q], exs[:n_ex]
 
 
+def coding_picks(day_index: int, n: int = 2):
+    """Two ★ interview problems per day, least practised first, different problems each day."""
+    probs = coding.problems()
+    pool = [k for k, p in probs.items() if p.star and p.pattern != "ML from scratch"]
+
+    def practice_rank(k):
+        best = coding.best_minutes(d, k)
+        return (coding.mastered(d, k), coding.solved(d, k), (best or 0) / probs[k].minutes, k)
+
+    pool.sort(key=practice_rank)
+    start = (day_index * n) % max(1, len(pool))
+    return [probs[k] for k in (pool[start:] + pool[:start])[:n]]
+
+
 done = sp.setdefault("done", {})
 for i, (title, sl, how) in enumerate(plan_days):
     day_date = date - dt.timedelta(days=len(plan_days) - i)
@@ -115,7 +130,17 @@ for i, (title, sl, how) in enumerate(plan_days):
                 a.markdown(f"{'✅' if ok else '⬜'} {ex.title} · ~{ex.minutes} min · W{ex.week}")
                 if b.button("Open", key=f"sp-ex-{key}-{ex.key}", width="stretch"):
                     go_exercise(ex.key)
+        if not title.startswith("Light"):
+            st.markdown("**Coding-round drill** (timer on, talk out loud, no hints):")
+            for p in coding_picks(i):
+                a, b = st.columns([0.75, 0.25], vertical_alignment="center")
+                a.markdown(f"{'✅' if coding.solved(d, p.key) else '⬜'} {p.title} · {p.level} · ~{p.minutes} min · "
+                           f"{p.pattern}")
+                if b.button("Solve", key=f"sp-code-{key}-{p.key}", width="stretch"):
+                    go_coding(p.key)
         if title.startswith("Full mock"):
+            st.page_link("app_pages/coding.py", label="Also: a 45-minute two-problem coding mock (Timed mock tab)",
+                         icon=":material/terminal:")
             st.page_link("app_pages/mock.py", label="Start a mock (scope: everything, ★ favoured, 10 questions)",
                          icon=":material/timer:")
         if title.startswith("Track specialty II"):

@@ -2,9 +2,9 @@ import datetime as dt
 
 import streamlit as st
 
-from mlprep import content, papers, plan, progress, srs
+from mlprep import coding, content, papers, plan, progress, srs
 from mlprep.content import PHASES
-from mlprep.ui import PAGES, data, go_papers, task_row
+from mlprep.ui import PAGES, data, go_coding, go_papers, task_row
 
 d = data()
 start = progress.start_date(d)
@@ -36,7 +36,9 @@ c3.metric("Streak", f"{streak} day{'s' if streak != 1 else ''}")
 c4.metric("Days left", max(0, (start + dt.timedelta(days=plan.TOTAL_WEEKS * 7) - today).days))
 
 if today < start:
-    st.info(f"Your plan starts on **{start:%A %d %B %Y}**. Change it on Settings, or look at the roadmap.")
+    st.info(f"Your plan starts on **{start:%A %d %B %Y}**. Change it on Settings, or look at the roadmap. "
+            "Before then, take the 10-minute diagnostic: it tells you which days of the optional Week 0 to do first.")
+    st.page_link(PAGES["diagnostic"], label="Diagnostic & Week 0", icon=":material/quiz:")
     st.page_link(PAGES["settings"], label="Settings", icon=":material/settings:")
     st.stop()
 if wd is None:
@@ -58,6 +60,14 @@ st.progress(1 - left / max(1, mins), text=f"About {mins} min planned, {left} min
 with st.container(border=True):
     for t in tasks:
         task_row(t, "today-")
+
+due_code = coding.due(d, today)
+if due_code:
+    r1, r2 = st.columns([0.75, 0.25], vertical_alignment="center")
+    r1.markdown(f":material/terminal: **Coding re-solves due:** {len(due_code)} — e.g. *{due_code[0].title}*. "
+                "Re-solving from a blank file is what makes patterns stick.")
+    if r2.button("Re-solve", key="today-resolve", width="stretch"):
+        go_coding(due_code[0].key)
 
 wk_papers = [p for p in papers.all_papers() if p.section == f"W{week}"]
 if wk_papers:

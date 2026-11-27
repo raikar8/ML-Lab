@@ -113,3 +113,21 @@ def test_mock_start_and_finish():
     assert log["clarified"] and log["passed"] == {}
     for k in mock["keys"]:
         assert not at.session_state["progress"]["coding"][k]["attempts"][-1]["passed"]
+
+
+def test_sprint_has_daily_coding_drills():
+    at = app()
+    at.switch_page("app_pages/sprint.py")
+    at.run()
+    assert not at.exception, [e.message for e in at.exception]
+    drills = [m for m in at.markdown if "Coding-round drill" in m.value]
+    solve = [b for b in at.button if b.key and b.key.startswith("sp-code-")]
+    assert len(drills) >= 5 and len(solve) >= 10
+    assert len({b.key.rsplit("-", 1)[-1] for b in solve}) >= 8     # different problems on different days
+
+
+def test_today_links_to_resolves():
+    at = app()
+    at.session_state["progress"]["coding"] = {"c01_two_sum": {"attempts": [], "rung": 0, "next": "2000-01-01"}}
+    at.run()
+    assert not at.exception
