@@ -1,17 +1,5 @@
 """
-title: Lowest common ancestor — binary tree, BST, and with parent pointers
-pattern: Trees
-level: medium
-time: 25
-frequency: very high
-week: 12
-day: 2
-tags: tree, recursion, bst
-complexity: O(n) for a general tree, O(h) for a BST, O(depth) with parent pointers
-hint: General tree: a node is the LCA if p and q are found in different subtrees, or it is one of them and the other is below.
-hint: BST: if both values are smaller go left, both larger go right, otherwise you're standing on the LCA.
-follow-up: Many LCA queries on a static tree: binary lifting (O(log n) per query) or Euler tour + RMQ.
-follow-up: Distance between two nodes = depth(p) + depth(q) − 2·depth(LCA).
+Lowest common ancestor — binary tree, BST, and with parent pointers
 
 `TreeNode` and `from_level` are given; nodes are compared by **identity**, and `p`, `q` are guaranteed to be in
 the tree. Implement

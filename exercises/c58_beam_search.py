@@ -1,17 +1,5 @@
 """
-title: Beam search decoding with length normalisation and EOS handling
-pattern: ML from scratch
-level: medium
-time: 35
-frequency: high
-week: 14
-day: 5
-tags: decoding, search, asr, seq2seq
-complexity: O(T · B · V log(B·V)) for T steps, beam B, vocab V (O(T·B·V) with a partial top-k)
-hint: Keep B hypotheses (tokens, total log-prob). Each step, expand every live hypothesis by every token, keep the best B.
-hint: A hypothesis that emits EOS is finished — move it to a finished list and stop expanding it; rank by log-prob / len^α.
-follow-up: Why does pure log-prob ranking prefer short outputs, and what does α = 1 vs 0 do?
-follow-up: CTC prefix beam search: what's different when blanks and repeats merge paths?
+Beam search decoding with length normalisation and EOS handling
 
 `step_fn(prefix) -> list[float]` returns the **log-probabilities** of the next token given a tuple `prefix` of
 token ids (length `V`, token `eos` included). Implement

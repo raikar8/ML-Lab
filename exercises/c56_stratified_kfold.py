@@ -1,17 +1,5 @@
 """
-title: Stratified k-fold cross-validation from scratch
-pattern: ML from scratch
-level: medium
-time: 30
-frequency: high
-week: 2
-day: 5
-tags: numpy, evaluation, cross-validation
-complexity: O(n log n) (grouping by label) time, O(n) space
-hint: Shuffle the indices of each class separately, then deal them out to folds round-robin.
-hint: Keep a running "next fold" pointer across classes so fold sizes differ by at most one.
-follow-up: Group k-fold: all samples of the same speaker must stay in one fold. Why does this matter for audio?
-follow-up: Time-series split: why is random k-fold wrong for forecasting, and what do you do instead?
+Stratified k-fold cross-validation from scratch
 
 Write `stratified_kfold(y, k, seed=0)` returning a list of `k` pairs `(train_idx, val_idx)` (sorted NumPy int
 arrays) such that

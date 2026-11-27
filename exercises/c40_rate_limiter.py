@@ -1,17 +1,5 @@
 """
-title: Rate limiters — token bucket and sliding-window log
-pattern: Design
-level: medium
-time: 30
-frequency: high
-week: 20
-day: 4
-tags: design, queue, time, systems
-complexity: token bucket O(1) per request; sliding log O(1) amortised per request, O(limit) memory per key
-hint: Token bucket: tokens refill continuously at `rate` per second up to `capacity`; a request spends one token.
-hint: Sliding log: keep a deque of accepted timestamps per key; drop those older than the window, accept if fewer than the limit remain.
-follow-up: Distributed rate limiting across many servers (central store with atomic ops, or per-node budgets).
-follow-up: Rate-limit an on-device wake-word detector's false triggers — which algorithm and why?
+Rate limiters — token bucket and sliding-window log
 
 Time is passed in explicitly (seconds, float, non-decreasing per key) so tests are deterministic.
 

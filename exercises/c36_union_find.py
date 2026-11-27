@@ -1,17 +1,5 @@
 """
-title: Union–find (disjoint set union) — components, redundant edge, and accounts merge
-pattern: Graphs
-level: medium
-time: 30
-frequency: high
-week: 18
-day: 4
-tags: union-find, graph, path-compression
-complexity: O(α(n)) amortised per operation with path compression + union by size
-hint: find(x) follows parents to the root and compresses the path; union(a, b) attaches the smaller tree under the larger.
-hint: An edge whose endpoints already share a root closes a cycle — that's the redundant edge.
-follow-up: Kruskal's minimum spanning tree = sort edges + union–find.
-follow-up: Number of islands with land added online — each addition is a union with up to 4 neighbours.
+Union–find (disjoint set union) — components, redundant edge, and accounts merge
 
 * `DSU(n)` with `find(x)`, `union(a, b) -> bool` (False if already connected), `connected(a, b)`,
   `size(x)` (size of x's component) and `components` (number of components, an attribute or property).

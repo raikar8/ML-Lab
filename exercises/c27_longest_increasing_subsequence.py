@@ -1,17 +1,5 @@
 """
-title: Longest increasing subsequence in O(n log n) — length and one witness
-pattern: Dynamic programming
-level: medium
-time: 30
-frequency: very high
-week: 14
-day: 2
-tags: dp, binary-search, patience-sorting
-complexity: O(n log n) time, O(n) space
-hint: tails[L] = the smallest possible last value of an increasing subsequence of length L+1. It's sorted.
-hint: For each x, binary-search the first tail ≥ x and replace it (or append). Keep predecessor indices to rebuild a witness.
-follow-up: Longest non-decreasing subsequence — what single change? (search for the first tail > x)
-follow-up: Russian-doll envelopes: sort by width ascending and height descending, then LIS on heights.
+Longest increasing subsequence in O(n log n) — length and one witness
 
 * `lis_length(nums)` — length of the longest **strictly** increasing subsequence;
 * `lis(nums)` — one such subsequence (as a list of values). Any valid longest one is accepted.

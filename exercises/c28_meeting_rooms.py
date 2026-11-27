@@ -1,17 +1,5 @@
 """
-title: Meeting rooms — minimum rooms, and the busiest moment
-pattern: Intervals
-level: medium
-time: 25
-frequency: very high
-week: 14
-day: 4
-tags: intervals, heap, sweep-line
-complexity: O(n log n) time, O(n) space
-hint: Sweep line: +1 at each start, −1 at each end; the running maximum is the answer. Process ends before starts at equal times.
-hint: Or: sort by start and keep a min-heap of end times of rooms in use; reuse the room that frees up first.
-follow-up: Assign an actual room number to each meeting (heap of (end, room)).
-follow-up: Same idea for the peak number of concurrent inference requests in a log → capacity planning.
+Meeting rooms — minimum rooms, and the busiest moment
 
 Meetings are half-open intervals `[start, end)` (a meeting ending at 10 frees the room for one starting at 10).
 

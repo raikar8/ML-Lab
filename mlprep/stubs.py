@@ -7,7 +7,24 @@ class preceded by a `# given` comment, or whose name starts with a single unders
 import ast
 
 
+def _strip_spoilers(src: str) -> str:
+    """Interview problems keep hints / follow-ups / complexity in the docstring header; the stub keeps only the
+    title and the problem statement (the app reads the metadata from the reference solution)."""
+    if not src.lstrip().startswith('"""'):
+        return src
+    start = src.index('"""') + 3
+    end = src.index('"""', start)
+    doc = src[start:end]
+    head, sep, spec = doc.strip("\n").partition("\n\n")
+    if not any(line.startswith(("hint:", "follow-up:", "complexity:")) for line in head.splitlines()):
+        return src
+    title = next((line.split(":", 1)[1].strip() for line in head.splitlines() if line.startswith("title:")), "")
+    new_doc = f"\n{title}\n\n{spec.strip()}\n"
+    return src[:start] + new_doc + src[end:]
+
+
 def stub_source(src: str) -> str:
+    src = _strip_spoilers(src)
     tree = ast.parse(src)
     lines = src.splitlines()
     out: list[str] = []

@@ -1,17 +1,5 @@
 """
-title: Balanced brackets — and where the first error is
-pattern: Stack
-level: easy
-time: 15
-frequency: very high
-week: 1
-day: 4
-tags: stack, parsing
-complexity: O(n) time, O(n) space
-hint: The most recent unmatched opener is the only one a closer may match — that's a stack.
-hint: Two failure modes: a closer that doesn't match the top (or an empty stack), and openers left over at the end.
-follow-up: Only one bracket type: do it in O(1) space with a counter.
-follow-up: Return the minimum number of insertions to make the string balanced.
+Balanced brackets — and where the first error is
 
 `first_error(s)` checks a string containing brackets `()[]{}` and any other characters (which are ignored).
 Return `-1` if every bracket is matched and properly nested. Otherwise return the **index of the first

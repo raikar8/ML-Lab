@@ -1,17 +1,5 @@
 """
-title: Count subarrays with sum k (prefix sums + hash map)
-pattern: Arrays & hashing
-level: medium
-time: 25
-frequency: very high
-week: 10
-day: 2
-tags: prefix-sums, hash-map
-complexity: O(n) time, O(n) space
-hint: sum(a[i:j]) = P[j] − P[i] with prefix sums P. You want pairs i < j with P[i] = P[j] − k.
-hint: Sweep j, keep counts of prefix sums seen so far (start with {0: 1}). Sliding windows fail with negatives.
-follow-up: Longest subarray with sum k (store the first index of each prefix sum instead of counts).
-follow-up: Count subarrays whose sum is divisible by k (prefix sums mod k).
+Count subarrays with sum k (prefix sums + hash map)
 
 * `count_subarrays(nums, k)` — number of contiguous non-empty subarrays whose sum equals `k`
   (values may be negative);

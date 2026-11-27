@@ -1,17 +1,5 @@
 """
-title: Validate a binary search tree, and find its k-th smallest value
-pattern: Trees
-level: medium
-time: 25
-frequency: very high
-week: 9
-day: 2
-tags: tree, bst, inorder, invariants
-complexity: O(n) time for validation; O(h + k) for k-th smallest; O(h) stack space
-hint: Checking only parent/child pairs is wrong — every node must lie in an interval inherited from all ancestors.
-hint: Equivalently, an inorder traversal of a BST is strictly increasing; stop early after k nodes for the k-th.
-follow-up: The tree is modified often and k-th smallest is asked often: store subtree sizes in each node.
-follow-up: Two nodes of a BST were swapped by mistake — restore it in O(1) extra space (Morris traversal).
+Validate a binary search tree, and find its k-th smallest value
 
 `TreeNode` and `from_level` are given. A valid BST has **strictly** smaller values in every left subtree and
 strictly larger values in every right subtree.

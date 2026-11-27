@@ -1,17 +1,5 @@
 """
-title: Dijkstra — shortest paths, path reconstruction, and network delay
-pattern: Graphs
-level: medium
-time: 30
-frequency: very high
-week: 17
-day: 4
-tags: graph, shortest-path, heap, dijkstra
-complexity: O((V + E) log V) time with a binary heap, O(V + E) space
-hint: Pop the closest unfinished node from a min-heap; relax its outgoing edges; skip stale heap entries.
-hint: Store prev[v] when you improve dist[v]; walk prev back from the target to rebuild the path.
-follow-up: Negative edges → Bellman–Ford (detect negative cycles). All-pairs on a small dense graph → Floyd–Warshall.
-follow-up: Cheapest path with at most k stops (Bellman–Ford limited to k+1 rounds, or BFS over (node, stops)).
+Dijkstra — shortest paths, path reconstruction, and network delay
 
 Nodes are `0..n-1`; `edges` holds directed `(u, v, w)` with `w >= 0`.
 

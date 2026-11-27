@@ -1,17 +1,5 @@
 """
-title: Trie with prefix counts and autocomplete
-pattern: Trie
-level: medium
-time: 30
-frequency: very high
-week: 13
-day: 4
-tags: trie, strings, design
-complexity: O(L) per insert/search/count for a word of length L; autocomplete O(L + size of the subtree visited)
-hint: Each node: dict of children, a count of words passing through, and a count of words ending here.
-hint: Autocomplete: walk to the prefix node, then DFS children in sorted order, collecting up to k words.
-follow-up: Word Search II — find all dictionary words in a letter grid (trie + backtracking, prune exhausted branches).
-follow-up: Memory: when would you use a double-array trie or a sorted array + binary search instead?
+Trie with prefix counts and autocomplete
 
 Implement `Trie` with
 

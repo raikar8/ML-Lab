@@ -1,17 +1,5 @@
 """
-title: Binary tree level-order traversal — levels, zigzag and right-side view
-pattern: Trees
-level: medium
-time: 25
-frequency: very high
-week: 7
-day: 2
-tags: tree, bfs, queue
-complexity: O(n) time, O(width) space
-hint: BFS with a queue; process exactly len(queue) nodes per round to know where a level ends.
-hint: Zigzag = reverse every other level; right-side view = last node of each level.
-follow-up: Do it with DFS carrying the depth — when is DFS preferable?
-follow-up: Vertical-order traversal (group by column, then row, then value).
+Binary tree level-order traversal — levels, zigzag and right-side view
 
 `TreeNode` and `from_level` are given. Implement
 

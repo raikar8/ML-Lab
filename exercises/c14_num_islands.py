@@ -1,17 +1,5 @@
 """
-title: Number of islands — and the size of the largest one
-pattern: Graphs
-level: medium
-time: 25
-frequency: very high
-week: 7
-day: 4
-tags: graph, bfs, dfs, grid, flood-fill
-complexity: O(R·C) time, O(R·C) worst-case queue/visited space
-hint: Every unvisited land cell starts a new island; flood-fill it (BFS/DFS) marking cells visited.
-hint: Use an explicit stack or queue — recursive DFS can blow Python's recursion limit on a 300×300 grid.
-follow-up: Count islands after each of a sequence of "add land" operations (union-find, near O(1) each).
-follow-up: Count distinct island shapes (normalise each island's cell offsets).
+Number of islands — and the size of the largest one
 
 `grid` is a list of strings of `'1'` (land) and `'0'` (water). Cells connect **4-directionally**.
 

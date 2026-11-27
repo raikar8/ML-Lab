@@ -1,17 +1,5 @@
 """
-title: k closest points to a query (heap) — the core of brute-force kNN retrieval
-pattern: Heap / priority queue
-level: medium
-time: 20
-frequency: very high
-week: 16
-day: 2
-tags: heap, geometry, knn, retrieval
-complexity: O(n log k) time, O(k) space
-hint: Keep a max-heap of size k on distance (push negative distances into heapq); pop when it grows past k.
-hint: Compare squared distances — no sqrt needed for ranking.
-follow-up: n is 10⁹ vectors in 768-D: what changes? (ANN: IVF, HNSW, product quantization — accuracy vs latency)
-follow-up: Vectorised NumPy version with argpartition: O(n) average.
+k closest points to a query (heap) — the core of brute-force kNN retrieval
 
 `points` is a list of tuples of equal dimension. Return the `k` points closest to `query` (Euclidean),
 sorted by increasing distance; ties broken by the point's **index** in the input (earlier first).

@@ -131,3 +131,10 @@ def test_today_links_to_resolves():
     at.session_state["progress"]["coding"] = {"c01_two_sum": {"attempts": [], "rung": 0, "next": "2000-01-01"}}
     at.run()
     assert not at.exception
+
+
+def test_stubs_do_not_reveal_hints_or_complexity():
+    for p in coding.problems().values():
+        head = p.stub_path.read_text().split('"""')[1]
+        assert "hint:" not in head and "follow-up:" not in head and "complexity:" not in head, p.key
+        assert p.title in head and p.spec.splitlines()[0] in head

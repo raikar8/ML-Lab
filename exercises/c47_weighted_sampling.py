@@ -1,17 +1,5 @@
 """
-title: Random sampling for ML pipelines — weighted pick, Fisher–Yates, weighted sample without replacement
-pattern: Randomised
-level: medium
-time: 30
-frequency: high
-week: 24
-day: 2
-tags: randomised, prefix-sums, binary-search, sampling
-complexity: weighted pick O(n) build + O(log n) per draw; shuffle O(n); A-ES sampling O(n log k)
-hint: Weighted pick: cumulative sums, draw u ∈ [0, total), binary-search the first prefix > u.
-hint: Fisher–Yates: for i from n−1 down to 1, swap a[i] with a[j], j uniform in [0, i]. Weighted without replacement: key = u^(1/w), keep the k largest.
-follow-up: Alias method: O(1) per draw after O(n) setup — when is it worth it? (millions of draws, fixed weights)
-follow-up: Why is "sort by random()" or swapping with j ∈ [0, n) a biased shuffle?
+Random sampling for ML pipelines — weighted pick, Fisher–Yates, weighted sample without replacement
 
 All randomness comes from a `random.Random` instance `rng` passed in (so results are testable).
 

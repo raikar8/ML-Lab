@@ -1,17 +1,5 @@
 """
-title: Coin change — fewest coins, and number of ways
-pattern: Dynamic programming
-level: medium
-time: 25
-frequency: very high
-week: 11
-day: 4
-tags: dp, unbounded-knapsack
-complexity: O(amount · len(coins)) time, O(amount) space
-hint: fewest[x] = 1 + min over coins c ≤ x of fewest[x − c]; fewest[0] = 0; unreachable = ∞.
-hint: Counting combinations (order doesn't matter): loop over coins in the OUTER loop so each multiset is counted once.
-follow-up: Swap the loops in ways() — what do you count now? (ordered sequences / compositions)
-follow-up: Why does greedy (largest coin first) fail for coins [1, 3, 4] and amount 6?
+Coin change — fewest coins, and number of ways
 
 * `fewest_coins(coins, amount)` — minimum number of coins summing to `amount` (unlimited supply of each
   denomination), or `-1` if impossible; `amount == 0` → 0.

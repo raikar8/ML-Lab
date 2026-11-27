@@ -1,17 +1,5 @@
 """
-title: Product of everything except self — no division
-pattern: Arrays & hashing
-level: medium
-time: 20
-frequency: very high
-week: 4
-day: 4
-tags: prefix-products, arrays
-complexity: O(n) time, O(1) extra space besides the output
-hint: out[i] = (product of everything left of i) × (product of everything right of i).
-hint: Fill out[] with left products in one pass, then sweep from the right with a running product.
-follow-up: Why is "total product / nums[i]" a bad idea even when division is allowed? (zeros, overflow)
-follow-up: Same idea for sums: return, for each i, the sum of the k elements around it.
+Product of everything except self — no division
 
 Return `out` where `out[i]` is the product of all elements of `nums` except `nums[i]`.
 **Don't use division**, and use O(1) extra space apart from the output list. Zeros are allowed.

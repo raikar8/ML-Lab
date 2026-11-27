@@ -1,17 +1,5 @@
 """
-title: Linked-list cycle — detect it, find where it starts, and find the middle
-pattern: Linked list
-level: medium
-time: 25
-frequency: very high
-week: 22
-day: 4
-tags: linked-list, fast-slow-pointers, floyd
-complexity: O(n) time, O(1) space
-hint: Floyd: slow moves 1, fast moves 2; they meet inside the cycle iff there is one.
-hint: After meeting, restart one pointer at head; moving both one step at a time, they meet at the cycle start.
-follow-up: Prove the restart trick (distance to start ≡ distance from meeting point to start, mod cycle length).
-follow-up: Find the duplicate number in an array of n+1 values in [1, n] in O(1) space — it's the same algorithm.
+Linked-list cycle — detect it, find where it starts, and find the middle
 
 `ListNode`, `from_list` are given (and `make_cycle(head, pos)` that links the tail to node `pos`).
 

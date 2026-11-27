@@ -1,17 +1,5 @@
 """
-title: Inverted dropout — forward, backward, train vs eval
-pattern: ML from scratch
-level: easy
-time: 20
-frequency: high
-week: 5
-day: 5
-tags: numpy, regularisation, backprop
-complexity: O(n) time and memory (the mask is kept for backward)
-hint: Train: mask ~ Bernoulli(1 − p), output x · mask / (1 − p) so the expected value is unchanged.
-hint: Backward multiplies the upstream gradient by the same mask / (1 − p). Eval mode is the identity.
-follow-up: Why "inverted" dropout instead of scaling by (1 − p) at test time? (no change needed in the deployed model)
-follow-up: Why does dropout interact badly with BatchNorm, and why do most LLMs now use little or no dropout?
+Inverted dropout — forward, backward, train vs eval
 
 Implement `Dropout(p, seed=0)` in NumPy:
 

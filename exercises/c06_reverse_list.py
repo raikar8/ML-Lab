@@ -1,17 +1,5 @@
 """
-title: Reverse a linked list — whole list, and k nodes at a time
-pattern: Linked list
-level: easy
-time: 25
-frequency: very high
-week: 3
-day: 4
-tags: linked-list, pointers
-complexity: O(n) time, O(1) extra space (iterative)
-hint: Walk the list with prev / cur; at each step save cur.next, point cur.next at prev, then advance both.
-hint: For k-groups: check that k nodes remain, reverse exactly those, and connect the old group head to the next result.
-follow-up: Do the whole-list reversal recursively — what is the space cost?
-follow-up: Reverse only positions left..right (1-indexed) in one pass.
+Reverse a linked list — whole list, and k nodes at a time
 
 `ListNode`, `from_list` and `to_list` are given. Implement
 

@@ -1,17 +1,5 @@
 """
-title: Multi-source BFS — rotting oranges and distance to the nearest zero
-pattern: Graphs
-level: medium
-time: 25
-frequency: high
-week: 23
-day: 5
-tags: bfs, multi-source, grid
-complexity: O(R·C) time and space
-hint: Put every source in the queue at time 0 and run one BFS; the BFS layer is the time / distance.
-hint: For "rotting", count fresh cells up front; if some are left after the BFS, return −1.
-follow-up: Walls and gates / distance from every cell to the nearest charger — the same pattern.
-follow-up: Weighted version (different spread times) → Dijkstra from multiple sources.
+Multi-source BFS — rotting oranges and distance to the nearest zero
 
 * `minutes_to_rot(grid)` — `grid` rows of `0` empty, `1` fresh, `2` rotten. Each minute, fresh oranges
   4-adjacent to a rotten one become rotten. Return the minutes until no fresh orange remains, `-1` if impossible,

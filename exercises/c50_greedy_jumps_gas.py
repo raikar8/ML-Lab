@@ -1,17 +1,5 @@
 """
-title: Greedy — jump game (reachability and fewest jumps) and gas station
-pattern: Greedy
-level: medium
-time: 30
-frequency: high
-week: 25
-day: 4
-tags: greedy, arrays, proof
-complexity: O(n) time, O(1) space each
-hint: Jump game: track the farthest index reachable so far; if i ever exceeds it you're stuck. Fewest jumps = BFS by "levels" of reach.
-hint: Gas station: if the total gas ≥ total cost a solution exists; whenever the running tank goes negative, the start must be after this point.
-follow-up: Prove the gas-station greedy (if you can't reach j from i, no start between i and j works either).
-follow-up: When does greedy fail and you need DP? (coin change with arbitrary denominations, jump game with costs)
+Greedy — jump game (reachability and fewest jumps) and gas station
 
 * `can_reach_end(jumps)` — `jumps[i]` is the maximum jump length from index `i`; can you reach the last index
   from index 0?

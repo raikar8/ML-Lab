@@ -1,17 +1,5 @@
 """
-title: Course schedule — topological order or detect a cycle
-pattern: Graphs
-level: medium
-time: 30
-frequency: very high
-week: 11
-day: 2
-tags: graph, topological-sort, kahn, cycle-detection
-complexity: O(V + E) time and space
-hint: Kahn's algorithm: repeatedly take a course with no remaining prerequisites (in-degree 0).
-hint: If you can't take all V courses, the leftover ones lie on (or behind) a cycle.
-follow-up: Return one actual cycle when there is one (DFS with colours and a parent stack).
-follow-up: Minimum number of semesters if you can take any number of courses per semester (BFS by levels).
+Course schedule — topological order or detect a cycle
 
 There are `n` courses `0..n-1`; `prereqs` holds pairs `(a, b)` meaning **b must be taken before a**.
 

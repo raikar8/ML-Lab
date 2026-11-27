@@ -1,17 +1,5 @@
 """
-title: Top-k frequent elements
-pattern: Heap / priority queue
-level: medium
-time: 20
-frequency: very high
-week: 4
-day: 2
-tags: heap, bucket-sort, counting
-complexity: O(n log k) with a size-k heap, or O(n) with bucket sort by count
-hint: Count first (a dict). Then you need the k largest counts — not a full sort.
-hint: A min-heap of size k keeps the k best seen so far; or bucket values by count (counts are ≤ n).
-follow-up: The data is a stream too large for memory: approximate heavy hitters (Misra–Gries, count-min sketch).
-follow-up: Top-k frequent words with ties broken alphabetically.
+Top-k frequent elements
 
 Return the `k` most frequent values of `nums`, ordered by **decreasing frequency**; ties go to the value that
 **appears first** in `nums`. If there are fewer than `k` distinct values, return them all.

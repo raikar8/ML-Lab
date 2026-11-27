@@ -1,17 +1,5 @@
 """
-title: Serialize and deserialize a binary tree
-pattern: Trees
-level: hard
-time: 30
-frequency: very high
-week: 23
-day: 4
-tags: tree, serialization, bfs, design
-complexity: O(n) time and space for both directions
-hint: Pre-order with an explicit marker for null children is enough to rebuild the shape uniquely.
-hint: Use a token separator and handle negative / multi-digit values; avoid recursion depth problems with an explicit stack or BFS.
-follow-up: Serialize a BST more compactly (pre-order without null markers — the BST property restores the shape).
-follow-up: Versioning a model-config tree on disk: why would you prefer a schema'd format (JSON/protobuf) here?
+Serialize and deserialize a binary tree
 
 `TreeNode` is given; values are integers (possibly negative). Implement `serialize(root) -> str` and
 `deserialize(data) -> TreeNode | None` such that `deserialize(serialize(t))` reproduces the exact shape and

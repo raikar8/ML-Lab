@@ -1,17 +1,5 @@
 """
-title: Next greater element — days until a warmer temperature
-pattern: Stack
-level: medium
-time: 20
-frequency: very high
-week: 8
-day: 2
-tags: monotonic-stack, arrays
-complexity: O(n) time (each index pushed and popped once), O(n) space
-hint: Keep a stack of indices whose answer is still unknown; their temperatures are non-increasing.
-hint: When a warmer day arrives, pop every colder index from the top and fill in its answer.
-follow-up: Circular array version (loop over 2n indices).
-follow-up: Sum of minimums of all subarrays — previous/next smaller with a monotonic stack.
+Next greater element — days until a warmer temperature
 
 * `days_until_warmer(t)` — for each day `i`, the number of days until a **strictly** warmer day, or 0 if none.
 * `next_greater(nums)` — for each `i`, the value of the next strictly greater element to the right, or `-1`.

@@ -1,17 +1,5 @@
 """
-title: Bit manipulation essentials
-pattern: Bit manipulation & math
-level: easy
-time: 25
-frequency: high
-week: 21
-day: 2
-tags: bits, xor, embedded
-complexity: O(1) or O(number of bits) per call; O(n) for the array problems
-hint: x & (x − 1) clears the lowest set bit; x & −x isolates it. a ^ a = 0 and a ^ 0 = a.
-hint: For the "two singles" problem: XOR everything, then split the numbers by any bit where the two singles differ.
-follow-up: Reverse the bits of a 32-bit word in O(log 32) steps with masks (classic DSP / FFT bit-reversal).
-follow-up: Count set bits for all numbers 0..n in O(n) with dp[i] = dp[i >> 1] + (i & 1).
+Bit manipulation essentials
 
 Implement without converting to strings (no `bin()`, `format`, `str`) and without `int.bit_count`:
 

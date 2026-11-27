@@ -1,17 +1,5 @@
 """
-title: Multinomial naive Bayes for text, in log space
-pattern: ML from scratch
-level: medium
-time: 35
-frequency: high
-week: 3
-day: 5
-tags: numpy, probability, classic, nlp
-complexity: O(nnz) training, O(V·C) per document scoring
-hint: Score(c | doc) = log P(c) + Σ_w count(w) · log P(w | c). Never multiply raw probabilities.
-hint: Laplace smoothing: P(w | c) = (count(w, c) + α) / (total(c) + α·V). Ignore words not in the vocabulary.
-follow-up: Why does naive Bayes give badly calibrated probabilities even when its accuracy is good?
-follow-up: Bernoulli vs multinomial NB — when would you pick each? What changes in the formula?
+Multinomial naive Bayes for text, in log space
 
 Implement `MultinomialNB(alpha=1.0)` working on **lists of token lists**:
 

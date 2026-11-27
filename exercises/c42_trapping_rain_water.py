@@ -1,17 +1,5 @@
 """
-title: Trapping rain water — two pointers, and the container with most water
-pattern: Two pointers
-level: hard
-time: 30
-frequency: very high
-week: 21
-day: 4
-tags: two-pointers, arrays, prefix-max
-complexity: O(n) time, O(1) space
-hint: Water above bar i = min(max height to the left, max to the right) − height[i].
-hint: Two pointers: move the side with the smaller running max inward — that side's water level is already decided.
-follow-up: 2-D version (trapping rain water on a height map) — a min-heap from the border inward.
-follow-up: Container problem: why is moving the shorter line always safe?
+Trapping rain water — two pointers, and the container with most water
 
 * `trap(height)` — total units of water trapped between bars of the given non-negative heights, O(n) time,
   O(1) extra space;
