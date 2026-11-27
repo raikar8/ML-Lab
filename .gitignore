@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+build/
+build-*/
+cpp/build-app/

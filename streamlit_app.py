@@ -26,6 +26,7 @@ sections = {
     "Learn": [
         page("theory", "Theory by week", ":material/menu_book:"),
         page("exercises", "Coding exercises", ":material/code:"),
+        page("cpp", "C/C++ track", ":material/memory:"),
     ],
     "Deep dives": [
         page("transformers", "Transformer hub", ":material/account_tree:"),

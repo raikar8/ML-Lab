@@ -20,6 +20,7 @@ PAGES = {
     "transformers": "app_pages/transformers.py",
     "frontier": "app_pages/frontier.py",
     "settings": "app_pages/settings.py",
+    "cpp": "app_pages/cpp.py",
 }
 
 KIND_ICON = {"theory": ":material/menu_book:", "exercise": ":material/code:", "quiz": ":material/quiz:",

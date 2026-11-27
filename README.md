@@ -19,6 +19,7 @@ streamlit run streamlit_app.py
 | **Mock interview** | Timed question rounds with follow-up probes and self-scoring; weak answers go back into review |
 | **Theory by week** | 5 theory sections per week with equations, interview angles, questions and a mini-project |
 | **Coding exercises** | 73 Python / NumPy / PyTorch stubs with pytest tests and reference solutions; edit & run in the app |
+| **C/C++ track** | 15 embedded/real-time C++ exercises (fixed point, FIR/biquad, SPSC ring buffer, memory pool, int8 GEMM + requantization, streaming conv, im2col, tiled GEMM…) with tests; compile & run from the app or with CMake |
 | **Transformer hub** | Evolution 2017→2026, block anatomy then vs now, attention/positional/MoE cheat sheets |
 | **Chinese model atlas** | DeepSeek, Qwen, Kimi, GLM, MiniMax models and their signature techniques |
 | **Frontier watch** | Ongoing topics worth tracking, and how to keep current |
