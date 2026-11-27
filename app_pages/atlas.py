@@ -2,6 +2,7 @@
 import pandas as pd
 import streamlit as st
 
+from mlprep import papers
 from mlprep.ui import go_theory
 
 st.title("Chinese model atlas")
@@ -46,6 +47,46 @@ if labs:
 if q:
     view = view[view.apply(lambda r: q.lower() in " ".join(map(str, r)).lower(), axis=1)]
 st.dataframe(view, hide_index=True, width="stretch", height=min(800, 38 * (len(view) + 1)))
+
+# Primary source per model: a reading-list title (tracked on the Papers page) or, where no report is out,
+# the lab's official model-card page.
+REPORTS = {
+    "DeepSeek-V2": "DeepSeek-V2",
+    "DeepSeek-V3": "DeepSeek-V3 Technical Report",
+    "DeepSeek-R1": "DeepSeek-R1",
+    "DeepSeek-V3.2": "DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models",
+    "DeepSeek-V4-Pro / Flash": "DeepSeek-V4 report and model cards",
+    "Qwen3": "Qwen3 Technical Report",
+    "Qwen3-Next": "Qwen3-Next: Towards Ultimate Training & Inference Efficiency",
+    "Kimi K2": "Kimi K2: Open Agentic Intelligence",
+    "Kimi Linear": "Kimi Linear: An Expressive, Efficient Attention Architecture",
+    "Kimi K2.5": "Kimi K2.5: Visual Agentic Intelligence",
+    "GLM-4.5": "GLM-4.5: Agentic, Reasoning, and Coding Foundation Models",
+    "GLM-5 (5.1, 5.2)": "GLM-5: from Vibe Coding to Agentic Engineering",
+    "MiniMax-01": "MiniMax-01: Scaling Foundation Models with Lightning Attention",
+    "MiniMax-M1": "MiniMax-M1 (CISPO)",
+    "Seed series · DAPO · HC": "Hyper-Connections",
+    "LongCat-Flash": "LongCat-Flash Technical Report",
+    "Step-3": "Step-3 is Large yet Affordable: Model-system Co-design for Cost-effective Decoding",
+}
+MODEL_CARDS = {
+    "Qwen3.5": "https://huggingface.co/Qwen",
+    "Kimi K2 Thinking": "https://huggingface.co/moonshotai",
+    "Kimi K3": "https://huggingface.co/moonshotai",
+    "MiniMax-M2 / M2.5 / M2.7": "https://huggingface.co/MiniMaxAI",
+    "ERNIE 4.5": "https://huggingface.co/baidu",
+}
+with st.expander("Primary source for each model", icon=":material/article:"):
+    by = papers.by_title()
+    for lab, model, *_ in rows:
+        if model in REPORTS:
+            p = by[REPORTS[model]]
+            st.markdown(f"- **{model}** — [{p.title}]({p.url}) · *{p.section_label}*")
+        elif model in MODEL_CARDS:
+            st.markdown(f"- **{model}** — [{lab} model cards]({MODEL_CARDS[model]})")
+        else:
+            raise KeyError(f"atlas row without a source: {model}")
+    st.caption("Tick these off and write five-line notes on the Papers page (filter by the 'Chinese labs' topic).")
 
 st.subheader("Technique → where it came from → who adopted it")
 st.dataframe(pd.DataFrame([

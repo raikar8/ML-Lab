@@ -2,6 +2,8 @@
 import pandas as pd
 import streamlit as st
 
+from mlprep.ui import sources
+
 st.title("Frontier watch")
 st.markdown(
     "Topics that were still moving fast in late 2026. Interviewers often end with *\"what's something recent you "
@@ -25,6 +27,27 @@ st.dataframe(pd.DataFrame([
     ("Edge runtimes", "ExecuTorch 1.x, LiteRT-LM, vendor NPU SDKs", "Your deployment toolchain; operator coverage changes quickly", "W25"),
     ("Hardware", "Blackwell FP4, Arm Ethos-U85, new mobile/automotive NPUs", "Know what the target supports natively", "W21"),
 ], columns=["Topic", "What's happening", "Why you care", "Weeks"]), hide_index=True, width="stretch")
+
+START_HERE = {
+    "Hybrid & linear attention": ["Gated Delta Networks", "Kimi Linear: An Expressive, Efficient Attention Architecture",
+                                  "Qwen3-Next: Towards Ultimate Training & Inference Efficiency"],
+    "Compressed / sparse attention": ["Native Sparse Attention",
+                                      "DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models"],
+    "Residual-stream redesign": ["Hyper-Connections", "mHC: Manifold-Constrained Hyper-Connections", "Attention Residuals"],
+    "New optimisers": ["Muon: An optimizer for hidden layers", "Muon is Scalable for LLM Training"],
+    "Low-bit by design": ["Microscaling Data Formats for Deep Learning", "The Era of 1-bit LLMs (BitNet b1.58)",
+                          "gpt-oss-120b & gpt-oss-20b Model Card"],
+    "RL for reasoning & agents": ["DeepSeekMath (introduces GRPO)", "DAPO: An Open-Source LLM Reinforcement Learning System at Scale",
+                                  "Group Sequence Policy Optimization"],
+    "Speculative decoding on device": ["EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty"],
+    "Generative speech enhancement": ["Speech Enhancement and Dereverberation with Diffusion-based Generative Models",
+                                      "Flow Matching for Generative Modeling"],
+    "Edge runtimes": ["ExecuTorch documentation", "TensorFlow Lite Micro: Embedded Machine Learning on TinyML Systems"],
+}
+st.subheader("Where to start reading")
+c1, c2 = st.columns(2)
+for i, (topic, titles) in enumerate(START_HERE.items()):
+    sources(titles, label=topic, where=c1 if i % 2 == 0 else c2)
 
 st.subheader("A 30-minute weekly routine to stay current")
 st.markdown("""

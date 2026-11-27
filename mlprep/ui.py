@@ -5,7 +5,7 @@ import re
 
 import streamlit as st
 
-from . import content, progress
+from . import content, papers, progress
 from .plan import LABS, Task
 
 PAGES = {
@@ -26,6 +26,7 @@ PAGES = {
     "designs": "app_pages/designs.py",
     "capstone": "app_pages/capstone.py",
     "notebooks": "app_pages/notebooks.py",
+    "papers": "app_pages/papers.py",
 }
 
 KIND_ICON = {"theory": ":material/menu_book:", "exercise": ":material/code:", "quiz": ":material/quiz:",
@@ -64,6 +65,12 @@ def go_theory(week: int, day: int | None = None) -> None:
 def go_exercise(key: str) -> None:
     st.session_state.exercise_key = key
     st.switch_page(PAGES["exercises"])
+
+
+def go_papers(section: str | None) -> None:
+    """Open the Papers page filtered to one week ('W12') or elective ('E1')."""
+    st.session_state.papers_section = section
+    st.switch_page(PAGES["papers"])
 
 
 def go_mock(week: int | None) -> None:
@@ -111,3 +118,10 @@ def lab_link(key: str, label: str | None = None, where=None) -> None:
         (where or st).page_link(path, label=label or f"Lab: {title}", icon=":material/science:")
     else:
         (where or st).caption(f"Lab '{title}' coming soon")
+
+
+def sources(titles: list[str], label: str = "Primary sources", where=None) -> None:
+    """Expander listing reading-list papers by exact title (links come from content/reading.md)."""
+    with (where or st).expander(f"{label} ({len(titles)})", icon=":material/article:"):
+        st.markdown(papers.refs_markdown(titles))
+        st.caption("Tick them off and write notes on the Papers page.")

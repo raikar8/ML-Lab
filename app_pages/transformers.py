@@ -2,7 +2,110 @@
 import pandas as pd
 import streamlit as st
 
-from mlprep.ui import go_theory, lab_link
+from mlprep.ui import go_theory, lab_link, sources
+
+# Primary sources per tab — exact titles from content/reading.md (the Papers page tracks them).
+SOURCES = {
+    "timeline": [
+        'Attention Is All You Need',
+        'BERT: Pre-training of Deep Bidirectional Transformers',
+        'Language Models are Few-Shot Learners (GPT-3)',
+        'Scaling Laws for Neural Language Models',
+        'Switch Transformers',
+        'RoFormer: Enhanced Transformer with Rotary Position Embedding',
+        'Train Short, Test Long (ALiBi)',
+        'Training Compute-Optimal Large Language Models (Chinchilla)',
+        'FlashAttention',
+        'LLaMA: Open and Efficient Foundation Language Models',
+        'Mistral 7B',
+        'Mixtral of Experts',
+        'Mamba: Linear-Time Sequence Modeling with Selective State Spaces',
+        'The Llama 3 Herd of Models',
+        'DeepSeek-V2',
+        'DeepSeek-V3 Technical Report',
+        'DeepSeek-R1',
+        'Kimi K2: Open Agentic Intelligence',
+        'Qwen3 Technical Report',
+        'Qwen3-Next: Towards Ultimate Training & Inference Efficiency',
+        'DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models',
+        'gpt-oss-120b & gpt-oss-20b Model Card',
+        'GLM-5: from Vibe Coding to Agentic Engineering',
+        'Kimi K2.5: Visual Agentic Intelligence',
+        'mHC: Manifold-Constrained Hyper-Connections',
+        'Attention Residuals',
+        'DeepSeek-V4 report and model cards',
+    ],
+    "block": [
+        'Attention Is All You Need',
+        'GLU Variants Improve Transformer',
+        'LLaMA: Open and Efficient Foundation Language Models',
+        'GQA: Training Generalized Multi-Query Transformer Models',
+        'DeepSeek-V2',
+        'Hyper-Connections',
+        'mHC: Manifold-Constrained Hyper-Connections',
+        'Attention Residuals',
+        'gpt-oss-120b & gpt-oss-20b Model Card',
+    ],
+    "families": [
+        'BERT: Pre-training of Deep Bidirectional Transformers',
+        'Language Models are Few-Shot Learners (GPT-3)',
+        'Conformer: Convolution-augmented Transformer for Speech Recognition',
+        'Learning Transferable Visual Models From Natural Language Supervision (CLIP)',
+        'Mamba: Linear-Time Sequence Modeling with Selective State Spaces',
+        'Kimi Linear: An Expressive, Efficient Attention Architecture',
+        'MiniMax-01: Scaling Foundation Models with Lightning Attention',
+    ],
+    "attention": [
+        'Fast Transformer Decoding: One Write-Head is All You Need (MQA)',
+        'GQA: Training Generalized Multi-Query Transformer Models',
+        'DeepSeek-V2',
+        'Mistral 7B',
+        'Efficient Streaming Language Models with Attention Sinks',
+        'MiniMax-01: Scaling Foundation Models with Lightning Attention',
+        'Parallelizing Linear Transformers with the Delta Rule over Sequence Length',
+        'Gated Delta Networks',
+        'Kimi Linear: An Expressive, Efficient Attention Architecture',
+        'Native Sparse Attention',
+        'DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models',
+        'DeepSeek-V4 report and model cards',
+    ],
+    "positions": [
+        'Attention Is All You Need',
+        'RoFormer: Enhanced Transformer with Rotary Position Embedding',
+        'Train Short, Test Long (ALiBi)',
+        'YaRN: Efficient Context Window Extension of Large Language Models',
+        'DeepSeek-V2',
+    ],
+    "moe": [
+        'Switch Transformers',
+        'Mixtral of Experts',
+        'DeepSeekMoE',
+        'Auxiliary-Loss-Free Load Balancing Strategy for Mixture-of-Experts',
+        'DeepSeek-V3 Technical Report',
+        'Kimi K2: Open Agentic Intelligence',
+        'Qwen3-Next: Towards Ultimate Training & Inference Efficiency',
+        'LongCat-Flash Technical Report',
+    ],
+    "multi_gpu": [
+        'Megatron-LM',
+        'ZeRO: Memory Optimizations Toward Training Trillion Parameter Models',
+        'GPipe',
+        'Reducing Activation Recomputation in Large Transformer Models',
+        'Ring Attention with Blockwise Transformers',
+        'DeepSeek-V3 Technical Report',
+        'Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations',
+    ],
+    "inference": [
+        'FlashAttention',
+        'Efficient Memory Management for LLM Serving with PagedAttention',
+        'Fast Inference from Transformers via Speculative Decoding',
+        'EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty',
+        'Mooncake: A KVCache-centric Disaggregated Architecture for LLM Serving',
+        'Step-3 is Large yet Affordable: Model-system Co-design for Cost-effective Decoding',
+        'LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale',
+        'AWQ: Activation-aware Weight Quantization',
+    ],
+}
 
 st.title("Transformer hub")
 st.markdown(
@@ -46,6 +149,8 @@ with tabs[0]:
         "stable to train."
     )
 
+    sources(SOURCES["timeline"])
+
 with tabs[1]:
     c1, c2 = st.columns(2)
     with c1:
@@ -78,6 +183,8 @@ digraph { rankdir=BT; node [shape=box, style="rounded,filled", fillcolor="#fdf0e
     if st.button("Read week 11 — the evolved transformer"):
         go_theory(11)
 
+    sources(SOURCES["block"])
+
 with tabs[2]:
     st.dataframe(pd.DataFrame([
         ("Encoder-only", "Bidirectional", "Masked LM / masked prediction", "BERT, RoBERTa, DeBERTa, HuBERT, WavLM", "Classification, embeddings, speech representations"),
@@ -90,6 +197,8 @@ with tabs[2]:
         ("Hybrid linear/full", "Causal, mostly recurrent layers", "Next token", "Qwen3.5, Kimi Linear/K3, MiniMax-01", "Long context with small state"),
         ("SSM", "Recurrent (selective scan)", "Next token", "Mamba, Mamba-2", "Streaming, long sequences"),
     ], columns=["Family", "Attention", "Objective", "Examples", "Good for"]), hide_index=True, width="stretch")
+
+    sources(SOURCES["families"])
 
 with tabs[3]:
     st.markdown("KV bytes per token per layer (BF16) assume head dim 128; `h` = query heads, `g` = KV heads.")
@@ -109,6 +218,8 @@ with tabs[3]:
     lab_link("kv_cache", "KV-cache calculator lab")
     lab_link("efficient_attention", "Efficient attention lab")
 
+    sources(SOURCES["attention"])
+
 with tabs[4]:
     st.dataframe(pd.DataFrame([
         ("Sinusoidal", "Added to input", "None", "Poor in practice", "Original Transformer"),
@@ -123,6 +234,8 @@ with tabs[4]:
     ], columns=["Scheme", "How", "Params", "Length extrapolation", "Used by"]), hide_index=True, width="stretch")
     st.latex(r"\mathrm{RoPE:}\quad \mathrm{Re}\big[q e^{im\theta}\,\overline{k e^{in\theta}}\big]=\mathrm{Re}\big[q\bar k\,e^{i(m-n)\theta}\big],\quad \theta_i=b^{-2i/d}")
     lab_link("attention", "Attention & RoPE lab")
+
+    sources(SOURCES["positions"])
 
 with tabs[5]:
     st.dataframe(pd.DataFrame([
@@ -139,6 +252,8 @@ with tabs[5]:
                 "`E · Σ f_i P_i`. Aux-loss-free: bias added **only for selection**, nudged by ±γ toward balance.")
     lab_link("moe", "MoE routing lab")
 
+    sources(SOURCES["moe"])
+
 with tabs[6]:
     st.dataframe(pd.DataFrame([
         ("Data parallel (DDP)", "Batch", "All-reduce grads", "Model fits on one GPU"),
@@ -154,6 +269,8 @@ with tabs[6]:
     if st.button("Read week 15 — multi-GPU & GPU programming"):
         go_theory(15)
 
+    sources(SOURCES["multi_gpu"])
+
 with tabs[7]:
     st.dataframe(pd.DataFrame([
         ("Weights", "Quantise (W8A8, W4A16, FP8/FP4), distil, prune, MoE", "Decode speed ∝ bytes/token"),
@@ -167,6 +284,8 @@ with tabs[7]:
     st.latex(r"\text{decode tokens/s}\approx\frac{\text{memory bandwidth}}{\text{active weight bytes}+\text{KV bytes read}}\qquad \mathbb E[\text{tokens/verify}]=\frac{1-\alpha^{\gamma+1}}{1-\alpha}")
     if st.button("Read week 14 — inference optimisation"):
         go_theory(14)
+
+    sources(SOURCES["inference"])
 
 with tabs[8]:
     path = [(10, "Tokens, embeddings, attention, positional encodings"), (11, "How the block evolved 2017 → 2026"),

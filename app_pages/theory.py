@@ -4,7 +4,7 @@ import streamlit as st
 
 from mlprep import content, plan, progress
 from mlprep.content import PHASES
-from mlprep.ui import data, go_exercise, lab_link, md, question_expander
+from mlprep.ui import data, go_exercise, go_papers, lab_link, md, question_expander
 
 d = data()
 weeks = content.weeks()
@@ -44,7 +44,10 @@ if section == "Mini-project":
 elif section == "Reading":
     st.header("Primary sources")
     st.caption("Read one per week and summarise it in five lines in your own words.")
-    md(content.reading().get(week, "_No reading for this week._") if isinstance(week, int) else "_See the papers cited in the text._")
+    if st.button("Track these on the Papers page", icon=":material/article:"):
+        go_papers(f"W{week}" if isinstance(week, int) else str(week))
+    md((content.reading().get(week) if isinstance(week, int) else content.elective_reading().get(str(week)))
+       or "_No reading for this week._")
 elif section == "All questions":
     st.header("All questions this week")
     st.caption("Answer out loud first, then open. ★ = high-yield (also used by the interview sprint).")

@@ -31,6 +31,7 @@ sections = {
         page("cpp", "C/C++ track", ":material/memory:"),
         page("notebooks", "GPU notebooks", ":material/developer_board:"),
         page("designs", "System design bank", ":material/architecture:"),
+        page("papers", "Papers", ":material/article:"),
         page("capstone", "Hardware capstone", ":material/precision_manufacturing:"),
     ],
     "Deep dives": [

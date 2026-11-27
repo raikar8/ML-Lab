@@ -16,7 +16,7 @@ PATH = Path(os.environ.get("MLPREP_PROGRESS", ROOT / "progress.json"))
 
 def _default() -> dict:
     return {"start_date": dt.date.today().isoformat(), "done": {}, "cards": {}, "mocks": [], "notes": {},
-            "exercise_status": {}, "sprint": {}, "hours_per_day": 2.0}
+            "exercise_status": {}, "sprint": {}, "hours_per_day": 2.0, "papers": {}}
 
 
 def load() -> dict:

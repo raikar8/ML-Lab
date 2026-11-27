@@ -181,10 +181,20 @@ def exercises_for(week: int, day: int | None = None) -> list[Exercise]:
 
 
 @lru_cache(maxsize=1)
-def reading() -> dict[int, str]:
-    """content/reading.md: '## W<n>' sections of markdown links to primary sources."""
+def _reading_sections() -> dict[str, str]:
+    """content/reading.md split on '## W<n>' / '## E<n>' headings, keyed 'W<n>' / 'E<n>'."""
     p = ROOT / "content" / "reading.md"
     if not p.exists():
         return {}
-    parts = re.split(r"^## W(\d+)\s*$", p.read_text(encoding="utf-8"), flags=re.M)
-    return {int(parts[i]): parts[i + 1].strip() for i in range(1, len(parts), 2)}
+    parts = re.split(r"^## ([WE]\d+)\s*$", p.read_text(encoding="utf-8"), flags=re.M)
+    return {parts[i]: parts[i + 1].strip() for i in range(1, len(parts), 2)}
+
+
+def reading() -> dict[int, str]:
+    """Reading list per scheduled week (markdown links to primary sources)."""
+    return {int(k[1:]): v for k, v in _reading_sections().items() if k.startswith("W")}
+
+
+def elective_reading() -> dict[str, str]:
+    """Reading list per elective, keyed 'E<n>'."""
+    return {k: v for k, v in _reading_sections().items() if k.startswith("E")}

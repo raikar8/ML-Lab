@@ -2,9 +2,9 @@ import datetime as dt
 
 import streamlit as st
 
-from mlprep import content, plan, progress, srs
+from mlprep import content, papers, plan, progress, srs
 from mlprep.content import PHASES
-from mlprep.ui import PAGES, data, task_row
+from mlprep.ui import PAGES, data, go_papers, task_row
 
 d = data()
 start = progress.start_date(d)
@@ -58,6 +58,15 @@ st.progress(1 - left / max(1, mins), text=f"About {mins} min planned, {left} min
 with st.container(border=True):
     for t in tasks:
         task_row(t, "today-")
+
+wk_papers = [p for p in papers.all_papers() if p.section == f"W{week}"]
+if wk_papers:
+    n_read = sum(papers.is_read(d, p.pid) for p in wk_papers)
+    r1, r2 = st.columns([0.75, 0.25], vertical_alignment="center")
+    r1.markdown(f":material/article: **Reading this week:** {n_read} / {len(wk_papers)} read — aim for at least one, "
+                "with a five-line note.")
+    if r2.button("Papers", key="today-papers", width="stretch"):
+        go_papers(f"W{week}")
 
 # catch-up list: anything unfinished before the viewed day
 past = []
