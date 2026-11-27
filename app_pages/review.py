@@ -24,9 +24,13 @@ with st.sidebar:
     wk_sel = st.multiselect("Only these weeks", list(weeks), format_func=lambda k: f"W{k:02d}")
     new_limit = st.slider("New cards per session", 0, 50, 15)
     core_only = st.toggle("★ high-yield only", False)
+    with_electives = st.toggle("Include electives (e.g. recommender systems)", False)
 
 pool = plan.unlocked_questions(start, today) if scope.startswith("Unlocked") else content.all_questions()
 pool = pool + errorlog.as_questions(d)  # your error-log cards are always in the deck
+elective_qs = [q for w in content.electives().values() for q in w.questions]
+if with_electives:
+    pool = pool + elective_qs
 if wk_sel:
     pool = [q for q in pool if q.week in wk_sel]
 if core_only:
@@ -41,7 +45,7 @@ c2.metric("New this session", len(new))
 mast = [srs.mastery(d["cards"].get(q.qid)) for q in pool]
 c3.metric("Solid or mastered", f"{sum(m in ('solid', 'mastered') for m in mast)}/{len(pool)}")
 
-sig = (scope, tuple(wk_sel), new_limit, core_only, today.isoformat())
+sig = (scope, tuple(wk_sel), new_limit, core_only, with_electives, today.isoformat())
 if st.session_state.get("rev_sig") != sig:
     queue = [q.qid for q in due]
     random.Random(today.toordinal()).shuffle(queue)
@@ -54,11 +58,11 @@ if not queue:
     st.success("Nothing due. Come back tomorrow, or widen the deck in the sidebar.")
     st.stop()
 
-qidx = content.question_index() | {q.qid: q for q in errorlog.as_questions(d)}
+qidx = content.question_index() | {q.qid: q for q in errorlog.as_questions(d) + elective_qs}
 q = qidx[queue[0]]
 card = d["cards"].get(q.qid)
 with st.container(border=True):
-    st.caption(f"Week {q.week} · {weeks[q.week].title} · {srs.mastery(card)}"
+    st.caption(f"Week {q.week} · {weeks[q.week].title if q.week in weeks else 'elective / error log'} · {srs.mastery(card)}"
                + (" · ★" if q.core else "") + f" · {len(queue)} left")
     st.markdown(f"### {q.text}")
     if not st.session_state.rev_show:

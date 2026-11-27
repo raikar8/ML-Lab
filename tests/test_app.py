@@ -37,3 +37,15 @@ def test_theory_every_week_and_section():
         at.switch_page("app_pages/theory.py")
         at.run()
         assert not at.exception, (wk, [e.message for e in at.exception])
+
+
+def test_theory_electives_and_reading():
+    from mlprep import content
+    for key in list(content.electives()):
+        at = AppTest.from_file(str(ROOT / "streamlit_app.py"), default_timeout=120)
+        at.run()
+        at.session_state["theory_week"] = key
+        at.switch_page("app_pages/theory.py")
+        at.run()
+        assert not at.exception, [e.message for e in at.exception]
+    assert len(content.reading()) == 27

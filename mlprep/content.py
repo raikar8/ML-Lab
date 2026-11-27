@@ -153,7 +153,19 @@ def weeks() -> dict[int, Week]:
 
 @lru_cache(maxsize=1)
 def exercises() -> dict[str, Exercise]:
-    return {p.stem: parse_exercise(p) for p in sorted(EX_DIR.glob("w*.py"))}
+    return {p.stem: parse_exercise(p) for p in sorted(EX_DIR.glob("w*.py")) + sorted(EX_DIR.glob("e*.py"))}
+
+
+@lru_cache(maxsize=1)
+def electives() -> dict[str, Week]:
+    """Optional weeks outside the schedule (content/electives/e<n>.md), keyed 'E<n>'."""
+    out = {}
+    for p in sorted((ROOT / "content" / "electives").glob("e*.md")):
+        w = parse_week(p)
+        for q in w.questions:
+            q.qid = p.stem + q.qid[3:]  # e1q01 ...
+        out[p.stem.upper()] = w
+    return out
 
 
 def all_questions() -> list[Question]:
@@ -166,3 +178,13 @@ def question_index() -> dict[str, Question]:
 
 def exercises_for(week: int, day: int | None = None) -> list[Exercise]:
     return [e for e in exercises().values() if e.week == week and (day is None or e.day == day)]
+
+
+@lru_cache(maxsize=1)
+def reading() -> dict[int, str]:
+    """content/reading.md: '## W<n>' sections of markdown links to primary sources."""
+    p = ROOT / "content" / "reading.md"
+    if not p.exists():
+        return {}
+    parts = re.split(r"^## W(\d+)\s*$", p.read_text(encoding="utf-8"), flags=re.M)
+    return {int(parts[i]): parts[i + 1].strip() for i in range(1, len(parts), 2)}

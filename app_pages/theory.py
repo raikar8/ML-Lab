@@ -14,17 +14,24 @@ cur = plan.week_day_for(start, dt.date.today())
 default_week = st.session_state.pop("theory_week", None) or (cur[0] if cur else 1)
 default_day = st.session_state.pop("theory_day", None)
 
-week = st.sidebar.selectbox("Week", list(weeks), index=list(weeks).index(default_week),
-                            format_func=lambda k: f"W{k:02d} · {weeks[k].title}", key="theory_week_sel")
-w = weeks[week]
-st.caption(f"Phase {w.phase} · {PHASES[w.phase][0]} · Week {week} · starts {plan.date_for(start, week, 1):%d %b %Y}")
+electives = content.electives()
+allw = {**weeks, **electives}
+keys = list(allw)
+week = st.sidebar.selectbox("Week", keys, index=keys.index(default_week) if default_week in keys else 0,
+                            format_func=lambda k: f"W{k:02d} · {allw[k].title}" if isinstance(k, int) else f"{k} · {allw[k].title}",
+                            key="theory_week_sel")
+w = allw[week]
+if isinstance(week, int):
+    st.caption(f"Phase {w.phase} · {PHASES[w.phase][0]} · Week {week} · starts {plan.date_for(start, week, 1):%d %b %Y}")
+else:
+    st.caption("Elective · outside the schedule — study it whenever it's relevant to the roles you apply for")
 st.title(w.title)
 if w.goal:
     st.markdown(f"**Goal.** {w.goal}")
 if w.lab in plan.LABS:
     lab_link(w.lab, f"Lab for this week: {plan.LABS[w.lab][0]}")
 
-options = [f"D{s.day} · {s.title}" for s in w.days] + ["Mini-project", "All questions"]
+options = [f"D{s.day} · {s.title}" for s in w.days] + ["Mini-project", "All questions", "Reading"]
 idx = 0
 if default_day and default_day <= len(w.days):
     idx = default_day - 1
@@ -34,6 +41,10 @@ section = st.segmented_control("Section", options, default=options[idx], key=f"s
 if section == "Mini-project":
     st.header("Mini-project (day 6)")
     md(w.project or "_No project this week — the lab is the day 6 task._")
+elif section == "Reading":
+    st.header("Primary sources")
+    st.caption("Read one per week and summarise it in five lines in your own words.")
+    md(content.reading().get(week, "_No reading for this week._") if isinstance(week, int) else "_See the papers cited in the text._")
 elif section == "All questions":
     st.header("All questions this week")
     st.caption("Answer out loud first, then open. ★ = high-yield (also used by the interview sprint).")
@@ -43,7 +54,7 @@ else:
     sec = w.days[options.index(section)]
     st.header(f"Day {sec.day} · {sec.title}")
     md(sec.body)
-    exs = content.exercises_for(week, sec.day)
+    exs = content.exercises_for(w.week, sec.day)
     qs = [q for q in w.questions if q.day == sec.day]
     if exs:
         st.subheader("Code it")
