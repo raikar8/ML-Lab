@@ -2,7 +2,7 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
-st.caption("Weeks 21–22 · Lab")
+st.caption("Weeks 22–23 · Lab")
 st.title("Quantization lab")
 with st.container(border=True):
     st.markdown("**What this lab is for.** See how bit width, granularity, outliers and the classic fixes "

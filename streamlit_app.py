@@ -1,4 +1,4 @@
-"""ML Interview Lab — a 26-week daily plan for ML / Deep Learning / Embedded AI engineer interviews.
+"""ML Interview Lab — a 27-week daily plan for ML / Deep Learning / Embedded AI engineer interviews.
 
 Run from the repository root:
     streamlit run streamlit_app.py

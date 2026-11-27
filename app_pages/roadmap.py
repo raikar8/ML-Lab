@@ -14,7 +14,7 @@ cur = plan.week_day_for(start, today)
 
 st.title("6-month roadmap")
 st.markdown(
-    "26 weeks in six phases. The order is deliberate: fundamentals that every loop tests come first, then the "
+    "27 weeks in six phases. The order is deliberate: fundamentals that every loop tests come first, then the "
     "deep-learning and transformer core, then the modern LLM techniques (where the Chinese labs led), and the "
     "embedded / optimisation block sits late so it's freshest for embedded-AI interviews. The last three weeks "
     "are system design, timed coding and full mocks."

@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 from . import content
 
-TOTAL_WEEKS = 26
+TOTAL_WEEKS = 27
 DAY_NAMES = {1: "Theory + code", 2: "Theory + code", 3: "Theory + code", 4: "Theory + code",
              5: "Theory + code", 6: "Lab & project", 7: "Review & mock"}
 

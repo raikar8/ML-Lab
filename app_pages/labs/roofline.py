@@ -2,7 +2,7 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
-st.caption("Week 20 · Lab")
+st.caption("Week 21 · Lab")
 st.title("Roofline & fixed point")
 tab1, tab2 = st.tabs(["Roofline", "Fixed point (Q15)"])
 

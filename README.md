@@ -1,6 +1,6 @@
 # ML Interview Lab
 
-A 26-week, day-by-day study app for **ML Engineer / Deep Learning / Embedded AI** interviews — from Python and
+A 27-week, day-by-day study app for **ML Engineer / Deep Learning / Embedded AI** interviews — from Python and
 classical ML to transformers, LLM post-training, the techniques behind DeepSeek, Qwen, Kimi, GLM and MiniMax, and
 model optimisation for on-device deployment (quantization, pruning, distillation, runtimes, real-time audio).
 
@@ -14,7 +14,7 @@ streamlit run streamlit_app.py
 | Page | What it does |
 |---|---|
 | **Today** | Your tasks for today (theory section, coding exercise, interview questions; lab day; review day), catch-up list, streak |
-| **6-month roadmap** | All 26 weeks in 6 phases with progress and card mastery per week |
+| **6-month roadmap** | All 27 weeks in 6 phases with progress and card mastery per week |
 | **Review** | Spaced-repetition deck of ~270 interview questions (★ = high-yield), unlocked as you go |
 | **Mock interview** | Timed question rounds with follow-up probes and self-scoring; weak answers go back into review |
 | **Theory by week** | 5 theory sections per week with equations, interview angles, questions and a mini-project |
@@ -32,9 +32,9 @@ streamlit run streamlit_app.py
 | 1 Foundations | 1–4 | Python for interviews, linear models & metrics, trees/boosting/SVM, unsupervised & messy data |
 | 2 Deep learning & PyTorch | 5–9 | backprop & autograd, optimisers (incl. Muon) & mixed precision, CNNs, sequence/audio models, PyTorch engineering |
 | 3 Transformers & LLMs | 10–16 | attention & positional encodings, the evolved block (GQA/MLA, mHC, AttnRes), MoE & scaling, efficient attention (DeltaNet, DSA, CSA/HCA), inference optimisation, multi-GPU & GPU kernels, generative models |
-| 4 Post-training & Chinese playbook | 17–19 | SFT/LoRA/RLHF/DPO/GRPO family, the DeepSeek lineage, Qwen/Kimi/GLM/MiniMax |
-| 5 Embedded AI & optimisation | 20–24 | hardware & roofline & fixed point, quantization I & II (GPTQ, AWQ, SmoothQuant, rotations, MXFP4), pruning & distillation, deployment (ExecuTorch, LiteRT, TFLite Micro, on-device LLMs, streaming audio) |
-| 6 System design & sprint | 25–26 | embedded ML system design, timed coding, debugging round, stories, full mock loops |
+| 4 Post-training, Chinese playbook & LLM behaviour | 17–20 | SFT/LoRA/RLHF/DPO/GRPO family, the DeepSeek lineage, Qwen/Kimi/GLM/MiniMax, hallucination, tokenisation failures, tool use, LLM evaluation, on-device RAG & agents |
+| 5 Embedded AI & optimisation | 21–25 | hardware & roofline & fixed point, quantization I & II (GPTQ, AWQ, SmoothQuant, rotations, MXFP4), pruning & distillation, deployment (ExecuTorch, LiteRT, TFLite Micro, on-device LLMs, streaming audio) |
+| 6 System design & sprint | 26–27 | embedded ML system design, timed coding, debugging round, stories, full mock loops |
 
 Each week: **days 1–5** theory + code + questions, **day 6** lab/mini-project, **day 7** review + timed mock + teach-back.
 

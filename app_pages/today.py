@@ -40,7 +40,7 @@ if today < start:
     st.page_link(PAGES["settings"], label="Settings", icon=":material/settings:")
     st.stop()
 if wd is None:
-    st.success("You've reached the end of the 26 weeks. Use the Mock interview and Interview-in-a-week pages "
+    st.success("You've reached the end of the 27 weeks. Use the Mock interview and Interview-in-a-week pages "
                "to stay sharp, and keep reviewing cards.")
     st.stop()
 

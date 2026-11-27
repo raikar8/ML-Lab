@@ -2,7 +2,7 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
-st.caption("Week 23 · Lab")
+st.caption("Week 24 · Lab")
 st.title("Pruning & low-rank")
 st.markdown("A weight matrix with low-rank structure, applied to inputs with a few outlier features. Compare output "
             "error of unstructured magnitude pruning, Wanda (|W|·‖x‖), 2:4, structured (row) pruning and SVD truncation "

@@ -20,7 +20,7 @@ PHASES = {
     1: ("Foundations", "Python fluency and classical ML, the part every interview loop still tests."),
     2: ("Deep learning & PyTorch", "Backprop, training dynamics, CNNs, sequence/audio models and PyTorch engineering."),
     3: ("Transformers & LLM architecture", "Attention, inference mechanics, scaling, efficient attention and generative models."),
-    4: ("Post-training & the Chinese playbook", "Fine-tuning, RL for LLMs, and how DeepSeek, Qwen, Kimi, GLM and MiniMax got ahead."),
+    4: ("Post-training, Chinese playbook & LLM behaviour", "Fine-tuning, RL for LLMs, how DeepSeek, Qwen, Kimi, GLM and MiniMax got ahead, and how LLMs behave in products."),
     5: ("Embedded AI & model optimisation", "Hardware, quantization, pruning, distillation and on-device deployment."),
     6: ("System design & interview sprint", "Embedded ML system design, timed coding and full mock loops."),
 }

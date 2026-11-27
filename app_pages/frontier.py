@@ -15,15 +15,15 @@ st.dataframe(pd.DataFrame([
     ("Compressed / sparse attention", "DSA, CSA/HCA, NSA; KV in FP8", "Mostly server-side, but KV compression ideas transfer", "W13, W18"),
     ("Residual-stream redesign", "mHC, Attention Residuals, hyper-connections", "Stability of deep models; watch if it reaches small models", "W11"),
     ("New optimisers", "Muon and variants; second-order-ish methods", "Token-efficient training of your own small models", "W6"),
-    ("Low-bit by design", "FP4/INT4/MXFP4 QAT at frontier scale; ternary BitNet", "Directly relevant: QAT recipes, micro-scaled formats in NPUs", "W21, W22"),
+    ("Low-bit by design", "FP4/INT4/MXFP4 QAT at frontier scale; ternary BitNet", "Directly relevant: QAT recipes, micro-scaled formats in NPUs", "W22, W23"),
     ("RL for reasoning & agents", "GRPO family, verifiable rewards, async RL, rubric rewards", "Distilled reasoning in small on-device models", "W17"),
-    ("On-policy distillation", "Student samples, teacher scores each token", "Best recipe for small deployable models", "W17, W23"),
-    ("Speculative decoding on device", "MTP/EAGLE heads, NPU prefill + CPU decode", "Faster local LLMs within bandwidth limits", "W14, W24"),
+    ("On-policy distillation", "Student samples, teacher scores each token", "Best recipe for small deployable models", "W17, W24"),
+    ("Speculative decoding on device", "MTP/EAGLE heads, NPU prefill + CPU decode", "Faster local LLMs within bandwidth limits", "W14, W25"),
     ("Native multimodal & omni models", "Joint text–image–video–audio pre-training; speech in/out", "Voice assistants in cars; speech LLMs", "W8, W16"),
-    ("Speech LLMs & full-duplex voice", "Codec tokens + LLMs; streaming interruptible dialogue", "Core to in-car assistants; latency/AEC interplay", "W8, W25"),
+    ("Speech LLMs & full-duplex voice", "Codec tokens + LLMs; streaming interruptible dialogue", "Core to in-car assistants; latency/AEC interplay", "W8, W26"),
     ("Generative speech enhancement", "Flow matching / few-step diffusion for SE", "Quality at low SNR vs latency trade-off", "W16"),
-    ("Edge runtimes", "ExecuTorch 1.x, LiteRT-LM, vendor NPU SDKs", "Your deployment toolchain; operator coverage changes quickly", "W24"),
-    ("Hardware", "Blackwell FP4, Arm Ethos-U85, new mobile/automotive NPUs", "Know what the target supports natively", "W20"),
+    ("Edge runtimes", "ExecuTorch 1.x, LiteRT-LM, vendor NPU SDKs", "Your deployment toolchain; operator coverage changes quickly", "W25"),
+    ("Hardware", "Blackwell FP4, Arm Ethos-U85, new mobile/automotive NPUs", "Know what the target supports natively", "W21"),
 ], columns=["Topic", "What's happening", "Why you care", "Weeks"]), hide_index=True, width="stretch")
 
 st.subheader("A 30-minute weekly routine to stay current")

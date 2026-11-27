@@ -12,21 +12,21 @@ weeks = content.weeks()
 
 TRACKS = {
     "ML Engineer (general)": {
-        "weeks": [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 14, 17, 25, 26],
+        "weeks": [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 14, 17, 20, 26, 27],
         "blurb": "Classical ML + deep learning fundamentals, PyTorch fluency, transformers, ML system design.",
     },
     "Embedded / Edge AI engineer": {
-        "weeks": [5, 6, 7, 9, 10, 11, 12, 14, 20, 21, 22, 23, 24, 25],
+        "weeks": [5, 6, 7, 9, 10, 11, 12, 14, 21, 22, 23, 24, 25, 26],
         "blurb": "Model optimisation (quantization, pruning, distillation), hardware/roofline, deployment runtimes, "
                  "real-time pipelines.",
     },
     "LLM / GenAI engineer": {
-        "weeks": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 22, 26],
+        "weeks": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 23, 27],
         "blurb": "Transformer internals, MoE, efficient attention, inference & serving, post-training (RLHF/DPO/GRPO), "
                  "frontier models.",
     },
     "Audio / Speech ML engineer": {
-        "weeks": [2, 6, 7, 8, 9, 10, 16, 20, 21, 23, 24, 25],
+        "weeks": [2, 6, 7, 8, 9, 10, 16, 20, 21, 22, 24, 25, 26],
         "blurb": "Speech front-ends, sequence models & CTC, enhancement, streaming/real-time deployment, "
                  "quantization for DSPs.",
     },
@@ -37,7 +37,7 @@ TEMPLATE = [
     ("Fundamentals blitz", slice(0, 4), "Re-derive the core maths out loud; 2 must-code drills; 15 ★ questions."),
     ("Deep learning & PyTorch core", slice(4, 7), "Timed: MHA, norms, training loop from a blank file; 15 ★ questions."),
     ("Track specialty I", slice(7, 10), "Read the summaries of these weeks; 2 drills; 15 ★ questions."),
-    ("Track specialty II + system design", slice(10, 14), "One 45-min system design out loud (week 25); 15 ★ questions."),
+    ("Track specialty II + system design", slice(10, 14), "One 45-min system design out loud (week 26); 15 ★ questions."),
     ("Full mock loop", slice(0, 14), "Coding 45′ · fundamentals 30′ · depth 30′ · design 45′ · behavioural 30′. "
                                      "Score each round."),
     ("Weak spots + stories", slice(0, 14), "Redo the lowest-scored mock topics; rehearse 3 project stories and 4 STAR "
@@ -119,11 +119,11 @@ for i, (title, sl, how) in enumerate(plan_days):
             st.page_link("app_pages/mock.py", label="Start a mock (scope: everything, ★ favoured, 10 questions)",
                          icon=":material/timer:")
         if title.startswith("Track specialty II"):
-            if st.button("Open week 25 — system design", key=f"sp-sd-{key}"):
-                go_theory(25)
+            if st.button("Open week 26 — system design", key=f"sp-sd-{key}"):
+                go_theory(26)
         if title.startswith("Weak"):
-            if st.button("Open week 26 — stories & behavioural", key=f"sp-beh-{key}"):
-                go_theory(26, 4)
+            if st.button("Open week 27 — stories & behavioural", key=f"sp-beh-{key}"):
+                go_theory(27, 4)
         if qs:
             st.markdown(f"**{len(qs)} ★ questions** — answer out loud first (weakest first):")
             for q in qs:

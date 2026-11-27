@@ -54,13 +54,13 @@ st.dataframe(pd.DataFrame([
     ("Aux-loss-free balancing", "DeepSeek-V3", "Many DeepSeek-derived MoEs", "W12"),
     ("GRPO (critic-free RL)", "DeepSeekMath / R1", "Nearly every open reasoning pipeline; variants DAPO, GSPO, CISPO", "W17"),
     ("MTP heads", "DeepSeek-V3", "Qwen3-Next/3.5, MiniMax M2, GLM, V4", "W14, W18"),
-    ("FP8 training (fine-grained scaling)", "DeepSeek-V3", "Industry-wide; MX formats in hardware", "W6, W22"),
+    ("FP8 training (fine-grained scaling)", "DeepSeek-V3", "Industry-wide; MX formats in hardware", "W6, W23"),
     ("Sparse attention DSA", "DeepSeek-V3.2", "GLM-5 (+ IndexShare)", "W13"),
     ("Gated DeltaNet hybrids", "Qwen3-Next (from NVIDIA/MIT research)", "Qwen3.5 family", "W13"),
     ("KDA / AttnRes", "Moonshot", "Kimi Linear, K3", "W11, W13"),
     ("Muon / MuonClip", "Moonshot (Muon by Jordan et al.)", "Kimi K2/K3, DeepSeek-V4", "W6"),
     ("mHC", "DeepSeek (HC from ByteDance)", "DeepSeek-V4", "W11"),
-    ("Low-bit QAT weights", "Kimi K2 Thinking (INT4), V4 (FP4), K3 (MXFP4)", "Trend for serving & on-device", "W21, W22"),
+    ("Low-bit QAT weights", "Kimi K2 Thinking (INT4), V4 (FP4), K3 (MXFP4)", "Trend for serving & on-device", "W22, W23"),
 ], columns=["Technique", "Origin", "Adopted by", "Weeks"]), hide_index=True, width="stretch")
 
 c1, c2, c3 = st.columns(3)
